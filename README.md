@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About this project...
+
+This project was created to practice creating a React SPA with ReactJS, MaterialUI and possibly more! This project is an alternative layout to what was done using an existing template, as seen [here](https://github.com/samly97/architectui-react-theme-free).
+
+This frontend component would be used in conjunction with a Golang API server, the latter of which is a private repo.
 
 ## Available Scripts
 
