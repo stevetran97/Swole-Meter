@@ -5,6 +5,7 @@ export default class App extends React.Component {
     loading: true,
     workouts: [],
     prs: [],
+    setData: [],
   };
 
   async componentDidMount() {
@@ -17,6 +18,7 @@ export default class App extends React.Component {
         "Content-Type": "application/json",
       },
     });
+    console.log("GET");
 
     const workoutData = await workoutResponse.json();
 
@@ -24,18 +26,45 @@ export default class App extends React.Component {
     const prResponse = await fetch(urlPrs, {
       mode: "cors",
       credentials: "include",
+      method: "POST",
       headers: {
         Accept: "json",
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        exercise: "squat",
+        year: "2020",
+        month: "9",
+      }),
     });
+    console.log("GET");
 
     const prData = await prResponse.json();
+
+    const urlSetsPayload = "http://localhost:8080/api/sets";
+    const workoutPayloadResponse = await fetch(urlSetsPayload, {
+      mode: "cors",
+      credentials: "include",
+      method: "POST",
+      headers: {
+        Accept: "json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        exercise: "squat",
+        year: "2020",
+        month: "9",
+      }),
+    });
+    console.log("POST");
+
+    const setData = await workoutPayloadResponse.json();
 
     this.setState({
       loading: false,
       workouts: workoutData,
       prs: prData,
+      setData: setData,
     });
   }
 
@@ -56,8 +85,8 @@ export default class App extends React.Component {
               </thead>
               <tbody>
                 {this.state.workouts.map((workout) => (
-                  <tr key={workout.ID}>
-                    <td>{workout.ID}</td>
+                  <tr key={workout.workout_id}>
+                    <td>{workout.workout_id}</td>
                     <td>{workout.date}</td>
                   </tr>
                 ))}
@@ -84,6 +113,35 @@ export default class App extends React.Component {
                     <td>{pr.date}</td>
                     <td>{pr.exercise}</td>
                     <td>{pr.weight}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {this.state.loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            <h1>Your Sets</h1>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Exercise</th>
+                  <th>Weight</th>
+                  <th>Reps</th>
+                  <th>RPE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.setData.map((set) => (
+                  <tr key={set.set_id}>
+                    <td>{set.date}</td>
+                    <td>{set.exercise}</td>
+                    <td>{set.weight}</td>
+                    <td>{set.reps}</td>
+                    <td>{set.rpe}</td>
                   </tr>
                 ))}
               </tbody>
