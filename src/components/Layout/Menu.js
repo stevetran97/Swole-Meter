@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuBar() {
+export default function Menu() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -38,7 +38,7 @@ export default function MenuBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            B3
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
