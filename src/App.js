@@ -1,12 +1,21 @@
 import React from "react";
-import { Grid, Box } from "@material-ui/core";
-import Menu from "./components/Layout/Menu";
+import { Grid, Box, Paper } from "@material-ui/core";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { LineChart } from "react-chartkick";
 import "chart.js";
+import Menu from "./components/Layout/Menu";
+import StickyTable from "./components/Layout/Table";
 
 class App extends React.Component {
+  theme = createMuiTheme({
+    palette: {
+      type: "light",
+    },
+  });
+
   state = {
     loading: true,
+    exercise: "squat",
     sets: [],
     chartData: [],
   };
@@ -40,32 +49,52 @@ class App extends React.Component {
     this.setState({
       loading: false,
       sets: sets,
-    });
-
-    this.setState({
-      chartData: this.makeChartData(this.state.sets),
+      chartData: this.makeChartData(sets),
     });
   }
 
   render() {
     return (
-      <Grid container direction="column">
-        <Grid item>
-          <Menu />
-        </Grid>
-        <Grid item container>
-          <Grid item xs={false} sm={1} md={2} xl={3} />
-          <Grid item xs={12} sm={10} md={8} xl={6}>
-            {/* Define content here*/}
+      <ThemeProvider theme={this.theme}>
+        <Paper style={{ height: "100vh" }}>
+          <Grid container direction="column">
             <Grid item>
-              <Box mt={4}>
-                <LineChart data={this.state.chartData} />
-              </Box>
+              <Menu />
+            </Grid>
+            <Grid item container>
+              <Grid item xs={false} sm={1} md={2} xl={3} />
+              <Grid item xs={12} sm={10} md={8} xl={6}>
+                {/* Define content here*/}
+                <Grid item>
+                  <Box mt={4}>
+                    <Paper elevation={3}>
+                      <LineChart
+                        ytitle="Weight (lbs)"
+                        data={this.state.chartData}
+                        library={{
+                          layout: {
+                            padding: {
+                              top: 20,
+                              left: 0,
+                              right: 10,
+                            },
+                          },
+                        }}
+                      />
+                    </Paper>
+                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box mt={4}>
+                    <StickyTable sets={this.state.sets} />
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid item xs={false} sm={1} md={2} xl={3} />
             </Grid>
           </Grid>
-          <Grid item xs={false} sm={1} md={2} xl={3} />
-        </Grid>
-      </Grid>
+        </Paper>
+      </ThemeProvider>
     );
   }
 }
