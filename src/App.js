@@ -5,6 +5,7 @@ import { LineChart } from "react-chartkick";
 import "chart.js";
 import Menu from "./components/Layout/Menu";
 import StickyTable from "./components/Layout/Table";
+import MonthPicker from "./components/Utils/MonthPicker";
 
 class App extends React.Component {
   theme = createMuiTheme({
@@ -64,6 +65,11 @@ class App extends React.Component {
             <Grid item container>
               <Grid item xs={false} sm={1} md={2} xl={3} />
               <Grid item xs={12} sm={10} md={8} xl={6}>
+                <Grid item>
+                  <Box mt={4}>
+                    <MonthPicker />
+                  </Box>
+                </Grid>
                 {/* Define content here*/}
                 <Grid item>
                   <Box mt={4}>
