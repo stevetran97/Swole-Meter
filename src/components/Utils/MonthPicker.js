@@ -6,12 +6,14 @@ import {
 } from "@material-ui/pickers";
 import { Grid } from "@material-ui/core";
 
-export default function MonthPicker() {
+export default function MonthPicker({ dateCallback }) {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+    dateCallback(date);
   };
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container>
