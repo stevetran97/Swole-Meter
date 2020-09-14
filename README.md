@@ -8,7 +8,7 @@ This frontend component would be used in conjunction with a Golang API server, t
 
 ### Update September 14th, 2020
 
-I finished a prototype of an exercise page. In this page the user could see his workout data for a particular month. By default, it displays data for the current month.
+I finished a prototype of an exercise page. In this page the user could see their workout data for a particular month. By default, it displays data for the current month.
 
 The user could see their predicted max, which calculated based on their reps and the weight lifted. This is a useful metric to see if they are progressing in terms of strength/hypertrophy.
 
