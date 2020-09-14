@@ -24,19 +24,22 @@ function App() {
 
   useEffect(() => {
     async function fetchWorkoutData() {
-      const response = await fetch("http://localhost:8080/api/sets", {
-        mode: "cors",
-        credentials: "include",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          exercise: exercise,
-          year: date.getFullYear().toString(),
-          month: (date.getMonth() + 1).toString(),
-        }),
-      });
+      const response = await fetch(
+        `http://${window.location.hostname}:8080/api/sets`,
+        {
+          mode: "cors",
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            exercise: exercise,
+            year: date.getFullYear().toString(),
+            month: (date.getMonth() + 1).toString(),
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -57,13 +60,13 @@ function App() {
         <Grid item xs={false} sm={1} md={2} xl={3} />
         <Grid item xs={12} sm={10} md={8} xl={6}>
           <Grid item>
-            <Box mt={4}>
+            <Box mt={4} ml={2}>
               <MonthPicker date={date} setDate={setDate} />
             </Box>
           </Grid>
           {/* Define content here*/}
           <Grid item>
-            <Box mt={4}>
+            <Box mt={4} mx={2}>
               <Paper elevation={3}>
                 <LineChart
                   ytitle="Weight (lbs)"
@@ -82,7 +85,7 @@ function App() {
             </Box>
           </Grid>
           <Grid item>
-            <Box mt={4}>
+            <Box mt={4} mb={2} mx={2}>
               <StickyTable sets={workoutData.sets} />
             </Box>
           </Grid>

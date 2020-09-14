@@ -43,7 +43,7 @@ export default function StickyTable(props) {
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} elevation={3}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
