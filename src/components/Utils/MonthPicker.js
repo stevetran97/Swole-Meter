@@ -6,12 +6,9 @@ import {
 } from "@material-ui/pickers";
 import { Grid } from "@material-ui/core";
 
-export default function MonthPicker({ dateCallback }) {
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
+export default function MonthPicker(props) {
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    dateCallback(date);
+    props.setDate(date);
   };
 
   return (
@@ -20,7 +17,7 @@ export default function MonthPicker({ dateCallback }) {
         <KeyboardDatePicker
           views={["month"]}
           helperText="Data for month..."
-          value={selectedDate}
+          value={props.date}
           onChange={handleDateChange}
         />
       </Grid>
