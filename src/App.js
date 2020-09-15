@@ -5,6 +5,7 @@ import "chart.js";
 import Menu from "./components/Layout/Menu";
 import StickyTable from "./components/Layout/Table";
 import MonthPicker from "./components/Utils/MonthPicker";
+import ExerciseTabs from "./components/Layout/ExerciseTabs";
 
 function App() {
   const exercise = "squat";
@@ -13,15 +14,21 @@ function App() {
     chartData: [],
   });
   const [date, setDate] = useState(new Date());
+  const [tabIndex, setTabIndex] = useState(0);
+  const [prData, setPRData] = useState({
+    prs: [],
+    chartData: [],
+  });
 
-  const formatSetsToChart = (sets) => {
-    let arr = [];
-    for (let i = 0; i < sets.length; i++) {
-      arr.push([sets[i].date, sets[i].predicted_max]);
+  const formatDataForChart = (data, field) => {
+    const arr = [];
+    for (let i = 0; i < data.length; i++) {
+      arr.push([data[i].date, data[i][field]]);
     }
     return arr;
   };
 
+  // Will fetch if user changes date.
   useEffect(() => {
     async function fetchWorkoutData() {
       const response = await fetch(
@@ -45,10 +52,39 @@ function App() {
 
       setWorkoutData({
         sets: data,
-        chartData: formatSetsToChart(data),
+        chartData: formatDataForChart(data, "predicted_max"),
       });
     }
     fetchWorkoutData();
+  }, [date]);
+
+  // Will fetch if user changes date.
+  useEffect(() => {
+    async function fetchPRData() {
+      const response = await fetch(
+        `http://${window.location.hostname}:8080/api/prs`,
+        {
+          mode: "cors",
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            exercise: exercise,
+            year: date.getFullYear().toString(),
+            month: (date.getMonth() + 1).toString(),
+          }),
+        }
+      );
+
+      const data = await response.json();
+      setPRData({
+        prs: data,
+        chartData: formatDataForChart(data, "weight"),
+      });
+    }
+    fetchPRData();
   }, [date]);
 
   return (
@@ -64,6 +100,11 @@ function App() {
               <MonthPicker date={date} setDate={setDate} />
             </Box>
           </Grid>
+          <Grid item>
+            <Box mt={2} mx={2}>
+              <ExerciseTabs tabIndex={tabIndex} setTabIndex={setTabIndex} />
+            </Box>
+          </Grid>
           {/* Define content here*/}
           <Grid item>
             <Box mt={4} mx={2}>
@@ -71,6 +112,25 @@ function App() {
                 <LineChart
                   ytitle="Weight (lbs)"
                   data={workoutData.chartData}
+                  library={{
+                    layout: {
+                      padding: {
+                        top: 20,
+                        left: 0,
+                        right: 10,
+                      },
+                    },
+                  }}
+                />
+              </Paper>
+            </Box>
+          </Grid>
+          <Grid item>
+            <Box mt={4} mx={2}>
+              <Paper elevation={3}>
+                <LineChart
+                  ytitle="Weight (lbs)"
+                  data={prData.chartData}
                   library={{
                     layout: {
                       padding: {
