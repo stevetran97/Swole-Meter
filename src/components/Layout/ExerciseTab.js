@@ -26,10 +26,23 @@ export default function ExerciseTabs(props) {
         textColor="primary"
         centered
       >
-        <Tab label="Workouts" />
-        <Tab label="Predicted Performance" />
-        <Tab label="PRs" />
+        <Tab label="Workouts" {...a11yProps(0)} />
+        <Tab label="Predicted Performance" {...a11yProps(1)} />
+        <Tab label="PRs" {...a11yProps(2)} />
       </Tabs>
     </Paper>
   );
+}
+
+// a11yProps returns HTML key-value tag pairs. The purpose of this
+// is to enhance accessibility for screenreader devices.
+//
+// This is used in conjunction with the "ExerciseTabPanel" React
+// components. "aria-controls" tells us that these tabs are the
+// controllers for the tab panels.
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
 }
