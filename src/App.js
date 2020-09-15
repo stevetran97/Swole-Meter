@@ -7,18 +7,39 @@ import StickyTable from "./components/Layout/Table";
 import MonthPicker from "./components/Utils/MonthPicker";
 import ExerciseTabs from "./components/Layout/ExerciseTabs";
 
+// obj = {url: string, exercise: string, date: date}
+async function fetchData(obj) {
+  const { url, exercise, date } = obj;
+  const response = await fetch(url, {
+    mode: "cors",
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      exercise: exercise,
+      year: date.getFullYear().toString(),
+      month: (date.getMonth() + 1).toString(),
+    }),
+  });
+
+  const data = await response.json();
+  return data;
+}
+
 function App() {
   const exercise = "squat";
   const [workoutData, setWorkoutData] = useState({
     sets: [],
     chartData: [],
   });
-  const [date, setDate] = useState(new Date());
-  const [tabIndex, setTabIndex] = useState(0);
   const [prData, setPRData] = useState({
     prs: [],
     chartData: [],
   });
+  const [date, setDate] = useState(new Date());
+  const [tabIndex, setTabIndex] = useState(0);
 
   const formatDataForChart = (data, field) => {
     const arr = [];
@@ -30,61 +51,29 @@ function App() {
 
   // Will fetch if user changes date.
   useEffect(() => {
-    async function fetchWorkoutData() {
-      const response = await fetch(
-        `http://${window.location.hostname}:8080/api/sets`,
-        {
-          mode: "cors",
-          credentials: "include",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            exercise: exercise,
-            year: date.getFullYear().toString(),
-            month: (date.getMonth() + 1).toString(),
-          }),
-        }
-      );
+    async function fetchExerciseData() {
+      const workoutData = await fetchData({
+        url: `http://${window.location.hostname}:8080/api/sets`,
+        date: date,
+        exercise: exercise,
+      });
 
-      const data = await response.json();
+      const prData = await fetchData({
+        url: `http://${window.location.hostname}:8080/api/prs`,
+        date: date,
+        exercise: exercise,
+      });
 
       setWorkoutData({
-        sets: data,
-        chartData: formatDataForChart(data, "predicted_max"),
+        sets: workoutData,
+        chartData: formatDataForChart(workoutData, "predicted_max"),
       });
-    }
-    fetchWorkoutData();
-  }, [date]);
-
-  // Will fetch if user changes date.
-  useEffect(() => {
-    async function fetchPRData() {
-      const response = await fetch(
-        `http://${window.location.hostname}:8080/api/prs`,
-        {
-          mode: "cors",
-          credentials: "include",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            exercise: exercise,
-            year: date.getFullYear().toString(),
-            month: (date.getMonth() + 1).toString(),
-          }),
-        }
-      );
-
-      const data = await response.json();
       setPRData({
-        prs: data,
-        chartData: formatDataForChart(data, "weight"),
+        pr: prData,
+        chartData: formatDataForChart(prData, "weight"),
       });
     }
-    fetchPRData();
+    fetchExerciseData();
   }, [date]);
 
   return (
