@@ -18,7 +18,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ExerciseTable({ columns, sets }) {
+// Props:
+//  - columns: column name and id that defines the data the table
+//             will hold.
+//  - tabIdx:  This differentiates the "id" value of the table row
+//             else React complains. This depends on the tab we're on.
+//  - uuid:    Unique identifier for each data row. E.g. for sets, this
+//             will be the set id.
+//  - data:    The list of data that will be represented by each row.
+export default function ExerciseTable({ columns, tabIdx, uuid, data }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -46,18 +54,18 @@ export default function ExerciseTable({ columns, sets }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sets
+            {data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((set) => {
+              .map((row) => {
                 return (
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={set.set_id}
+                    key={`${tabIdx}-${row[uuid]}`}
                   >
                     {columns.map((column) => {
-                      const value = set[column.id];
+                      const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.format && typeof value === "number"
@@ -75,7 +83,7 @@ export default function ExerciseTable({ columns, sets }) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={sets.length}
+        count={data.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

@@ -82,6 +82,8 @@ export default function ExercisePage({ exercise }) {
             {/* Define content here*/}
             <ExercisePageContent
               columns={workoutColumns}
+              tabIdx={0}
+              uuid={"set_id"}
               table={workoutData.workouts.data}
               chart={workoutData.workouts.chart}
             />
@@ -89,12 +91,16 @@ export default function ExercisePage({ exercise }) {
           <ExerciseTabPanel value={tabIndex} index={1} dir={theme.direction}>
             <ExercisePageContent
               columns={workoutColumns}
+              tabIdx={1}
+              uuid={"set_id"}
               table={workoutData.workouts.data}
             />
           </ExerciseTabPanel>
           <ExerciseTabPanel value={tabIndex} index={2} dir={theme.direction}>
             <ExercisePageContent
               columns={prColumns}
+              tabIdx={2}
+              uuid={"pr_id"}
               table={workoutData.prs.data}
               chart={workoutData.prs.chart}
             />
