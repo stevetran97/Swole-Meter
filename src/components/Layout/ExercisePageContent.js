@@ -4,10 +4,7 @@ import { LineChart } from "react-chartkick";
 import "chart.js";
 import StickyTable from "./Table";
 
-export default function ExercisePageContent(props) {
-  const data = props;
-  const { sets, chartData } = data;
-
+export default function ExercisePageContent({ table, chart }) {
   return (
     <div>
       <Grid item>
@@ -15,7 +12,7 @@ export default function ExercisePageContent(props) {
           <Paper elevation={3}>
             <LineChart
               ytitle="Weight (lbs)"
-              data={chartData}
+              data={chart}
               library={{
                 layout: {
                   padding: {
@@ -35,7 +32,7 @@ export default function ExercisePageContent(props) {
       </Grid>
       <Grid item>
         <Box mt={4} mb={2} mx={2}>
-          {<StickyTable sets={sets} />}
+          {<StickyTable sets={table} />}
         </Box>
       </Grid>
     </div>
