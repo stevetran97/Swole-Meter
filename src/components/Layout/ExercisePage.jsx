@@ -39,7 +39,7 @@ export default function ExercisePage({ exercise }) {
         exercise: exercise,
       });
 
-      const JSON = await fetchData({
+      const prJSON = await fetchData({
         url: `http://${window.location.hostname}:8080/api/prs`,
         date: date,
         exercise: exercise,
@@ -51,8 +51,8 @@ export default function ExercisePage({ exercise }) {
           chart: formatDataForChart(workoutJSON, "predicted_max"),
         },
         prs: {
-          data: JSON,
-          chart: formatDataForChart(JSON, "weight"),
+          data: prJSON,
+          chart: formatDataForChart(prJSON, "weight"),
         },
       });
     }
@@ -81,15 +81,20 @@ export default function ExercisePage({ exercise }) {
           <ExerciseTabPanel value={tabIndex} index={0} dir={theme.direction}>
             {/* Define content here*/}
             <ExercisePageContent
+              columns={workoutColumns}
               table={workoutData.workouts.data}
               chart={workoutData.workouts.chart}
             />
           </ExerciseTabPanel>
           <ExerciseTabPanel value={tabIndex} index={1} dir={theme.direction}>
-            <ExercisePageContent table={workoutData.workouts.data} />
+            <ExercisePageContent
+              columns={workoutColumns}
+              table={workoutData.workouts.data}
+            />
           </ExerciseTabPanel>
           <ExerciseTabPanel value={tabIndex} index={2} dir={theme.direction}>
             <ExercisePageContent
+              columns={prColumns}
               table={workoutData.prs.data}
               chart={workoutData.prs.chart}
             />
@@ -121,3 +126,27 @@ async function fetchData(obj) {
   const data = await response.json();
   return data;
 }
+
+// workoutColumns is the column headers and id for the ExerciseComponent
+// React Component.
+//
+// This is passed down as props from ExercisePage -> ExercisePageContent
+// -> Exercise Table.
+const workoutColumns = [
+  { id: "date", label: "Name" },
+  { id: "exercise", label: "Exercise" },
+  { id: "weight", label: "Weight" },
+  { id: "reps", label: "Reps" },
+  { id: "rpe", label: "RPE" },
+  { id: "predicted_max", label: "Predicted Max" },
+];
+
+// prColumns is the column headers and id for the ExerciseComponent
+// React Component.
+//
+// This is passed down as props from ExercisePage -> ExercisePageContent
+// -> Exercise Table.
+const prColumns = [
+  { id: "date", label: "Date" },
+  { id: "weight", label: "Weight" },
+];

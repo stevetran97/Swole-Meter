@@ -9,15 +9,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 
-const columns = [
-  { id: "date", label: "Name" },
-  { id: "exercise", label: "Exercise" },
-  { id: "weight", label: "Weight" },
-  { id: "reps", label: "Reps" },
-  { id: "rpe", label: "RPE" },
-  { id: "predicted_max", label: "Predicted Max" },
-];
-
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -27,8 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ExerciseTable(props) {
-  const sets = props.sets;
+export default function ExerciseTable({ columns, sets }) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
