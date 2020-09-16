@@ -86,10 +86,13 @@ export default function ExercisePage({ exercise }) {
             />
           </ExerciseTabPanel>
           <ExerciseTabPanel value={tabIndex} index={1} dir={theme.direction}>
-            Panel data in Panel 2
+            <ExercisePageContent table={workoutData.workouts.data} />
           </ExerciseTabPanel>
           <ExerciseTabPanel value={tabIndex} index={2} dir={theme.direction}>
-            Panel data in Panel 3
+            <ExercisePageContent
+              table={workoutData.prs.data}
+              chart={workoutData.prs.chart}
+            />
           </ExerciseTabPanel>
         </SwipeableViews>
       </Grid>

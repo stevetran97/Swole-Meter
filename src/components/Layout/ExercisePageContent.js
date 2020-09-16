@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Box, Paper } from "@material-ui/core";
 import { LineChart } from "react-chartkick";
 import "chart.js";
-import StickyTable from "./Table";
+import ExerciseTable from "./ExerciseTable";
 
 export default function ExercisePageContent({ table, chart }) {
   return (
@@ -32,7 +32,7 @@ export default function ExercisePageContent({ table, chart }) {
       </Grid>
       <Grid item>
         <Box mt={4} mb={2} mx={2}>
-          {<StickyTable sets={table} />}
+          {<ExerciseTable sets={table} />}
         </Box>
       </Grid>
     </div>

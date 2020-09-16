@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function StickyTable(props) {
+export default function ExerciseTable(props) {
   const sets = props.sets;
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
