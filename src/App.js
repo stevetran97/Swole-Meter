@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@material-ui/core/styles";
-import { Grid, Box, Paper } from "@material-ui/core";
-import { LineChart } from "react-chartkick";
-import "chart.js";
+import { Grid, Box } from "@material-ui/core";
 import Menu from "./components/Layout/Menu";
-import StickyTable from "./components/Layout/Table";
 import MonthPicker from "./components/Utils/MonthPicker";
 import ExerciseTab from "./components/Layout/ExerciseTab";
 import ExerciseTabPanel from "./components/Layout/ExerciseTabPanel";
+import ExercisePageContent from "./components/Layout/ExercisePageContent";
 
 // obj = {url: string, exercise: string, date: date}
 async function fetchData(obj) {
@@ -33,7 +31,6 @@ async function fetchData(obj) {
 
 function App() {
   const theme = useTheme();
-
   const exercise = "squat";
   const [workoutData, setWorkoutData] = useState({
     sets: [],
@@ -106,58 +103,13 @@ function App() {
           >
             <ExerciseTabPanel value={tabIndex} index={0} dir={theme.direction}>
               {/* Define content here*/}
-              <Grid item>
-                <Box mt={4} mx={2}>
-                  <Paper elevation={3}>
-                    <LineChart
-                      ytitle="Weight (lbs)"
-                      data={workoutData.chartData}
-                      library={{
-                        layout: {
-                          padding: {
-                            top: 20,
-                            left: 0,
-                            right: 10,
-                          },
-                        },
-                      }}
-                    />
-                  </Paper>
-                </Box>
-              </Grid>
-              <Grid item>
-                <Box mt={4} mb={2} mx={2}>
-                  <StickyTable sets={workoutData.sets} />
-                </Box>
-              </Grid>
+              <ExercisePageContent {...workoutData} />
             </ExerciseTabPanel>
             <ExerciseTabPanel value={tabIndex} index={1} dir={theme.direction}>
-              <Grid item>
-                <Box mt={4} mx={2}>
-                  <Paper elevation={3}>
-                    <LineChart
-                      ytitle="Weight (lbs)"
-                      data={prData.chartData}
-                      library={{
-                        layout: {
-                          padding: {
-                            top: 20,
-                            left: 0,
-                            right: 10,
-                          },
-                        },
-                      }}
-                    />
-                  </Paper>
-                </Box>
-              </Grid>
+              Panel data in Panel 2
             </ExerciseTabPanel>
             <ExerciseTabPanel value={tabIndex} index={2} dir={theme.direction}>
-              <Grid item>
-                <Box mt={4} mb={2} mx={2}>
-                  <StickyTable sets={workoutData.sets} />
-                </Box>
-              </Grid>
+              Panel data in Panel 3
             </ExerciseTabPanel>
           </SwipeableViews>
         </Grid>

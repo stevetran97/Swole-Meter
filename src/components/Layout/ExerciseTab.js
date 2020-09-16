@@ -27,7 +27,7 @@ export default function ExerciseTabs(props) {
         centered
       >
         <Tab label="Workouts" {...a11yProps(0)} />
-        <Tab label="Predicted Performance" {...a11yProps(1)} />
+        <Tab label="Predicted Max" {...a11yProps(1)} />
         <Tab label="PRs" {...a11yProps(2)} />
       </Tabs>
     </Paper>
