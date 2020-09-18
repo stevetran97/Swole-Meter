@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import Menu from "./components/Layout/Menu.jsx";
-import ExercisePage from "./components/Layout/ExercisePage.jsx";
+import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";
 
 function App() {
   return (

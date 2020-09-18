@@ -57,7 +57,12 @@ export default function ExercisePage({ exercise }) {
       });
     }
     fetchExerciseData();
-  }, [date]);
+    // Add exercise as a dependency for use effect to stop console
+    // from complaining. In practice, exercise will not change on
+    // a specific exercise page, i.e. the "squat" page will have
+    // "exercise = squat" and the "bench" page will have "exercise =
+    // bench".
+  }, [date, exercise]);
 
   return (
     <Grid item container>
@@ -85,6 +90,12 @@ export default function ExercisePage({ exercise }) {
               tabIdx={0}
               uuid={"set_id"}
               table={workoutData.workouts.data}
+              chartOpts={libOpts({
+                title: {
+                  text: "Predicted Max",
+                  display: true,
+                },
+              })}
               chart={workoutData.workouts.chart}
             />
           </ExerciseTabPanel>
@@ -102,6 +113,12 @@ export default function ExercisePage({ exercise }) {
               tabIdx={2}
               uuid={"pr_id"}
               table={workoutData.prs.data}
+              chartOpts={libOpts({
+                title: {
+                  text: "PRs",
+                  display: true,
+                },
+              })}
               chart={workoutData.prs.chart}
             />
           </ExerciseTabPanel>
@@ -131,6 +148,31 @@ async function fetchData(obj) {
 
   const data = await response.json();
   return data;
+}
+
+// libOpts returns an object that used to format the "LineChart"
+// component from the "react-chartkick" module. Additional options
+// could be passed in as an object to add features as desired.
+//
+// e.g.
+// {
+//   title: {...},
+//   legdend: {...},
+// }
+function libOpts(opts) {
+  const obj = {
+    library: {
+      layout: {
+        padding: {
+          top: 20,
+          left: 0,
+          right: 10,
+        },
+      },
+      ...opts,
+    },
+  };
+  return obj;
 }
 
 // workoutColumns is the column headers and id for the ExerciseComponent
