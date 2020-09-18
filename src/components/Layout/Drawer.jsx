@@ -1,13 +1,20 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import MuiDrawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import {
+  Drawer as MuiDrawer,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+} from "@material-ui/core";
+import {
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  FitnessCenter,
+} from "@material-ui/icons";
 import drawerWidth from "./constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,9 +35,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Drawer({ open, setOpen }) {
+function Drawer({ open, setOpen, history }) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const itemList = [
+    {
+      text: "Squat",
+      icon: <FitnessCenter />,
+      onClick: () => history.push("/squat"),
+    },
+    {
+      text: "Bench",
+      icon: <FitnessCenter />,
+      onClick: () => history.push("/bench"),
+    },
+    {
+      text: "Deadlift",
+      icon: <FitnessCenter />,
+      onClick: () => history.push("/deadlift"),
+    },
+  ];
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -63,10 +88,18 @@ export default function Drawer({ open, setOpen }) {
       </List>
       <Divider />
       <List>
-        <ListItem button key={"Squat"}>
-          <ListItemText primary={"Squat"} />
-        </ListItem>
+        {itemList.map((item, index) => {
+          const { text, icon, onClick } = item;
+          return (
+            <ListItem button key={text} onClick={onClick}>
+              {icon && <ListItemIcon>{icon}</ListItemIcon>}
+              <ListItemText key={text}>{text}</ListItemText>
+            </ListItem>
+          );
+        })}
       </List>
     </MuiDrawer>
   );
 }
+
+export default withRouter(Drawer);

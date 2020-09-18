@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft({ children }) {
+export default function BasePage(props) {
+  const { children, history } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -44,7 +45,7 @@ export default function PersistentDrawerLeft({ children }) {
     <div className={classes.root}>
       <CssBaseline />
       <Menu open={open} setOpen={setOpen} />
-      <Drawer open={open} setOpen={setOpen} />
+      <Drawer open={open} setOpen={setOpen} history={history} />
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,

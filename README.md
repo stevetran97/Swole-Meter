@@ -18,7 +18,15 @@ Demo is as follows:
 
 TODO:
 
-- Add tabs to show other workout metrics such as weekly volume, PRs, etc.
-- Create page for Bench, Squat, and Deadlift
-- Create a sidebar nav to navigate between pages
-- Use React router to route those pages
+- ~~Add tabs to show other workout metrics such as weekly volume, PRs, etc.~~ (September 15, 2020)
+- ~~Create page for Bench, Squat, and Deadlift~~ (September 18, 2020)
+- ~~ Create a sidebar nav to navigate between pages ~~ (September 18, 2020)
+- ~~Use React router to route those pages~~ (September 18, 2020)
+- Rethink content displayed in workout table. I think it will be more beneficial to show
+- Add general "Workout" and "PR" page so users could:
+  - Add new workouts/PRs
+  - See all their workouts/PRs (squat/bench/dead)
+- Add widget page for dashboard view
+- Add Home button to navigate to landing page
+- Logouts
+- Modify user settings
