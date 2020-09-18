@@ -6,9 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-
-const drawerWidth = 240; // might have to remove this, or pass in
-// as props
+import drawerWidth from "./constants";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
