@@ -69,7 +69,7 @@ export default function ExercisePage({ exercise }) {
       <Grid item xs={false} sm={1} md={2} xl={3} />
       <Grid item xs={12} sm={10} md={8} xl={6}>
         <Grid item>
-          <Box mt={4} ml={2}>
+          <Box ml={2}>
             <MonthPicker date={date} setDate={setDate} />
           </Box>
         </Grid>
