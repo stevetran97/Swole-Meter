@@ -20,9 +20,12 @@ TODO:
 
 - ~~Add tabs to show other workout metrics such as weekly volume, PRs, etc.~~ (September 15, 2020)
 - ~~Create page for Bench, Squat, and Deadlift~~ (September 18, 2020)
-- ~~ Create a sidebar nav to navigate between pages ~~ (September 18, 2020)
+- ~~Create a sidebar nav to navigate between pages~~ (September 18, 2020)
 - ~~Use React router to route those pages~~ (September 18, 2020)
-- Rethink content displayed in workout table. I think it will be more beneficial to show
+- Rethink content displayed in workout table. I think it will be more beneficial to show metrics at first site rather than dumping sets into the table. For instance:
+  - Show top set @ x reps
+  - Show volume for that session
+  - Add link to open modal to show sets
 - Add general "Workout" and "PR" page so users could:
   - Add new workouts/PRs
   - See all their workouts/PRs (squat/bench/dead)
