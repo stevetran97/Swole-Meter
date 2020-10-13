@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BasePage from "./components/Layout/BasePage.jsx";
 import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";
+import HomePage from "./components/ExerciseLayout/Home.jsx";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           from="/"
           render={(props) => (
             <BasePage {...props}>
-              <div>There's nothing here. Navigate to an exercise page.</div>
+              <HomePage></HomePage>
             </BasePage>
           )}
         />

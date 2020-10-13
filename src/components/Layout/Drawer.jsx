@@ -82,8 +82,10 @@ function Drawer({ open, setOpen, history }) {
       </div>
       <Divider />
       <List>
-        <ListItem button key={"Workout"}>
-          <ListItemText primary={"Workout"} />
+        <ListItem button key={"Home"} onClick = {
+          () => history.push("")
+        }>
+          <ListItemText primary={"Home"} />
         </ListItem>
       </List>
       <Divider />
