@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import classnames from 'classnames';
+import { CSSTransition } from 'react-transition-group';
+// import classnames from 'classnames';
 
 import {
     Row, Col,
@@ -95,7 +95,7 @@ export default class HomePage extends Component {
 
         return (
             <Fragment>
-                <ReactCSSTransitionGroup
+                <CSSTransition
                     component="div"
                     transitionName="TabsAnimation"
                     transitionAppear={true}
@@ -115,12 +115,12 @@ export default class HomePage extends Component {
                                         </div>
                                         <div className="btn-actions-pane-right">
                                             <Button outline
-                                                    className={"border-0 btn-pill btn-wide btn-transition " + classnames({active: this.state.activeTab1 === '11'})}
+                                                    className={"border-0 btn-pill btn-wide btn-transition 11" }
                                                     color="primary" onClick={() => {
                                                 this.toggle1('11');
                                             }}>STR</Button>
                                             <Button outline
-                                                    className={"ml-1 btn-pill btn-wide border-0 btn-transition " + classnames({active: this.state.activeTab1 === '22'})}
+                                                    className={"ml-1 btn-pill btn-wide border-0 btn-transition 22" }
                                                     color="primary" onClick={() => {
                                                 this.toggle1('22');
                                             }}>REPS</Button>
@@ -516,7 +516,7 @@ export default class HomePage extends Component {
                             </Col>
                         </Row>
                     </div>
-                </ReactCSSTransitionGroup>
+                </CSSTransition>
             </Fragment>
         )
     }
