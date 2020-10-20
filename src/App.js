@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BasePage from "./components/Layout/BasePage.jsx";
 import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";
-import HomePage from "./components/ExerciseLayout/Home.jsx";
+import HomePage from "./components/HomeLayout/Home.jsx";
 
 function App() {
   return (
