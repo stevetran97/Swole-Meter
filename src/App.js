@@ -1,52 +1,32 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import BasePage from "./components/Layout/BasePage.jsx";
-import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";
-import HomePage from "./components/HomeLayout/Home.jsx";
+import { useRoutes } from 'react-router-dom';
+import routes from './RoutingHub'
 
-function App() {
+import {ThemeProvider} from '@material-ui/core';
+import DefaultStyle from './components/DefaultStyles';
+import theme from './theme'
+
+const App = () => {
+  const routing = useRoutes(routes);
+
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route
-          exact
-          from="/"
-          render={(props) => (
-            <BasePage {...props}>
-              <HomePage></HomePage>
-            </BasePage>
-          )}
-        />
-        <Route
-          exact
-          from="/squat"
-          render={(props) => (
-            <BasePage {...props}>
-              <ExercisePage exercise={"squat"}></ExercisePage>
-            </BasePage>
-          )}
-        />
-        <Route
-          exact
-          from="/bench"
-          render={(props) => (
-            <BasePage {...props}>
-              <ExercisePage exercise={"bench"}></ExercisePage>
-            </BasePage>
-          )}
-        />
-        <Route
-          exact
-          from="/deadlift"
-          render={(props) => (
-            <BasePage {...props}>
-              <ExercisePage exercise={"deadlift"}></ExercisePage>
-            </BasePage>
-          )}
-        />
-      </Switch>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <DefaultStyle/>
+        {routing}
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
+
+
+
+
+
+
+
+
+// import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import BasePage from "./components/Layout/BasePage.jsx";
+// import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";
+// import HomePage from "./components/HomeLayout/Home.jsx";
