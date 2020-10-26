@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@material-ui/core/styles";
 import { Grid, Box } from "@material-ui/core";
+
 import MonthPicker from "../Utils/MonthPicker";
 import ExerciseTab from "./ExerciseTab";
 import ExerciseTabPanel from "./ExerciseTabPanel";
@@ -56,6 +57,7 @@ export default function ExercisePage({ exercise }) {
         },
       });
     }
+    
     fetchExerciseData();
     // Add exercise as a dependency for use effect to stop console
     // from complaining. In practice, exercise will not change on

@@ -1,9 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-
 import HomeView from "./views/HomeView";
 import DashboardLayout from "./Layout/DashboardLayout"
-
 
 const routes = [
   {
@@ -14,8 +12,6 @@ const routes = [
       {path: 'squat', element: <HomeView/>},
       {path: 'bench', element: <HomeView/>},
       {path: 'deadlift', element: <HomeView/>}
-
-
     ] 
   },
   {
@@ -26,11 +22,6 @@ const routes = [
     ]
   }
 ];
-
-
-// const routes = {
-//   '/': () => (<DashboardLayout><HomeView /></DashboardLayout>),
-// };
 
 export default routes;
 

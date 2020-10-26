@@ -5,7 +5,8 @@ import {
   Card,  makeStyles, Container, Grid 
 } from '@material-ui/core'
 
-import ExerciseProgress from "./WidgetTemplates/ExcerciseProgress";
+import HomeProgressionWidget from "./Widgets/HomeProgressionWidget";
+
 import Page from '../../components/Page';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,15 +37,7 @@ const HomeView = ({className, ...rest})  => {
                 xl={3}
                 xs={12}
               >
-                <Card 
-                  className = {clsx(classes.root, className)}
-                  {...rest}
-                >
-                  <ExerciseProgress exercise = "SQUAT" improvement_percent = {50} exercise_progress_percent = {30}/>
-                  <ExerciseProgress exercise = "BENCHPRESS" improvement_percent = {60} exercise_progress_percent = {90}/>
-                  <ExerciseProgress exercise = "DEADLIFT" improvement_percent = {50} exercise_progress_percent = {100}/>
-                  <ExerciseProgress exercise = "SHOULDER PRESS" improvement_percent = {50} exercise_progress_percent = {90}/>
-                </Card>
+                <HomeProgressionWidget/>
               </Grid>   
             </Grid>
         </Container>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRoutes } from 'react-router-dom';
-import routes from './RoutingHub'
+import routes from './route_list'
 
 import {ThemeProvider} from '@material-ui/core';
 import DefaultStyle from './components/DefaultStyles';
@@ -18,13 +18,6 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
-
-
-
 
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import BasePage from "./components/Layout/BasePage.jsx";

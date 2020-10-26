@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types'
-
 
 import {
   Box, Card, CardContent, Grid, LinearProgress, Typography, makeStyles, colors, Avatar
@@ -10,8 +8,6 @@ import {
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
-
-// import { render } from 'nprogress';
 
 const classes = makeStyles(() => ({
   root: {
@@ -24,20 +20,7 @@ const classes = makeStyles(() => ({
   }
 }));
 
-// const ExerciseProgress = ({className, ...rest})  => {
-//   const classes = useStyles();
-
-class ExerciseProgress extends Component  {
-  constructor(props)  {
-    super(props);
-
-    // this.state = {
-    //   improvement_percent: 12, 
-    //   exercise_progress_percent: 90
-    // };
-  }
-
-  
+class SingleProgressBar extends Component  {
   render() {
     return (
       <CardContent> 
@@ -127,7 +110,15 @@ class ExerciseProgress extends Component  {
   }
 }
 
-ExerciseProgress.propTypes = {
+SingleProgressBar.propTypes = {
   className: PropTypes.string
 }
-export default ExerciseProgress
+export default SingleProgressBar
+
+
+// import clsx from 'clsx';
+
+// import { render } from 'nprogress';
+
+// const ExerciseProgress = ({className, ...rest})  => {
+//   const classes = useStyles();

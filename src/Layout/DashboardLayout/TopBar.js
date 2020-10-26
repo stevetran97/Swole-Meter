@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -12,9 +11,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-// import NotificationsIcon from '@material-ui/core';
-// import InputIcon from '@material-ui/core';
-// import Logo from 'src/component/Logo';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -59,3 +55,9 @@ TopBar.propTypes = {
 };
 
 export default TopBar;
+
+
+// import NotificationsIcon from '@material-ui/core';
+// import InputIcon from '@material-ui/core';
+// import Logo from 'src/component/Logo';
+// import { Link as RouterLink } from 'react-router-dom';

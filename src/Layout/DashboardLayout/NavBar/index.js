@@ -66,18 +66,18 @@ const NavBar = ({onMobileClose, openMobile}) => {
         >
           TEST USERNAME TEXT
         </Typography>
-        <Divider/>
-        <Box p={2}>
-          <List>
-            {items.map((item) => (
-              <NavItem
-                href = {item.href}
-                key={item.title}
-                title={item.title}
-              />
-            ))}
-          </List>
-        </Box>
+      </Box>
+      <Divider/>
+      <Box p={2}>
+        <List>
+          {items.map((item) => (
+            <NavItem
+              href = {item.href}
+              key={item.title}
+              title={item.title}
+            />
+          ))}
+        </List>
       </Box>
       <Box flexGrow ={1}/>
     </Box>
