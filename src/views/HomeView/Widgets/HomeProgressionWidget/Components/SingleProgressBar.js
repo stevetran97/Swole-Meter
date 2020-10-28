@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 
 import {
-  Box, Card, CardContent, Grid, LinearProgress, Typography, makeStyles, colors, Avatar
+  Box, CardContent, Grid, LinearProgress, Typography, makeStyles, colors, Avatar
 } from '@material-ui/core'
 
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -36,7 +36,7 @@ class SingleProgressBar extends Component  {
                 gutterBottom
                 variant = "h6"
               >
-                {this.props.exercise} PROGRESS
+                {this.props.exercise}
               </Typography>
             </Grid>
             {/* Title */}

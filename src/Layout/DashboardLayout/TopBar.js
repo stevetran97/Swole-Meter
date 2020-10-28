@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   AppBar, 
-  Badge,
   Box,
   Hidden,
   IconButton,

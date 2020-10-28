@@ -1,11 +1,11 @@
 import React from 'react';
-import clsx from 'clsx';
 // import PropTypes from 'prop-types'
 import {
-  Card,  makeStyles, Container, Grid 
+  makeStyles, Container, Grid 
 } from '@material-ui/core'
 
 import HomeProgressionWidget from "./Widgets/HomeProgressionWidget";
+import SummaryChartWidget from "./Widgets/SummaryChartWidget";
 
 import Page from '../../components/Page';
 
@@ -38,6 +38,15 @@ const HomeView = ({className, ...rest})  => {
                 xs={12}
               >
                 <HomeProgressionWidget/>
+              </Grid> 
+              <Grid
+                item
+                lg={9}
+                sm={9}
+                xl={9}
+                xs={9}
+              >
+                <SummaryChartWidget/>
               </Grid>   
             </Grid>
         </Container>
