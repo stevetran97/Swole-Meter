@@ -29,13 +29,13 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
     datasets: [
       {
         backgroundColor: colors.indigo[900],
-        data:[18, 5, 19, 27, 29, 19, 20 , 5, 19, 27, 29,],
-        label:'Bench'
+        data:[18,5,19,27,29,19,20,5,19,27,29, 200, 211, 230, 240],
+        label:'Bench (lb)'
       },
       {
         backgroundColor: colors.red[900],
-        data: [1,0,4,2,55,0,0,0,81, 76],
-        label:'Squat'
+        data: [1,0,4,2,55,0,0,0,81,76, 200, 211, 222, 240, 300, 400],
+        label:'Squat (lb)'
       }
     ],
     labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '1 Aug', '2 Aug', '3 Aug']
@@ -47,7 +47,7 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
     animation: false,
     cornerRadius: 0,
     layout: {padding: 0},
-    legend: { display: true },
+    legend: {display: true},
     scales: {
       xAxes:  [
         {
@@ -66,6 +66,12 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
       ],
       yAxes: [
         { 
+          scaleLabel: {
+            fontSize: 14,
+            fontColor: theme.palette.text.primary,
+            display: true,
+            labelString: 'Pounds'
+          },
           ticks: {
             fontColor: theme.palette.text.secondary,
             beginAtZero: true,
