@@ -1,124 +1,147 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { ThemeProvider } from '@material-ui/styles';
 import PropTypes from 'prop-types'
 
 import {
-  Box, CardContent, Grid, LinearProgress, Typography, makeStyles, colors, Avatar
+  Box, CardContent, Grid, LinearProgress, Typography, makeStyles, withStyles
 } from '@material-ui/core'
 
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
 
+
+// Styles for ProgressBar Component
 const classes = makeStyles(() => ({
   root: {
     height: '100%'
   },
-  avatar: {
-    backgroundColor: colors.orange[600],
-    height: 56,
-    width: 56
-  }
 }));
 
-class SingleProgressBar extends Component  {
-  render() {
-    return (
-      <CardContent> 
-          <Grid
-            container
-            justify="space-between"
-            spacing = {3}
-          >
-            {/* Title */}
-            <Grid item>
-              <Typography
-                color = 'textSecondary'
-                gutterBottom
-                variant = "h6"
-              >
-                {this.props.exercise}
-              </Typography>
-            </Grid>
-            {/* Title */}
+// Custom ProgressBar for Local Component use
+const BorderLinearProgress = withStyles((theme) => ({
+  root: {
+    height: 10,
+    borderRadius: 5,
+  },
+  colorPrimary: {
+    backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: '#1a90ff',
+  },
+}))(LinearProgress);
 
-            {/* Icon */}
-            <Grid item>
-             <Avatar className = {classes.avatar}
-              >
-                <InsertChartIcon/>
-              </Avatar>
-            </Grid>
-            {/* Icon */}
+
+
+
+// Single Full ProgressBar Component
+function SingleProgressBar(props) {
+
+  // // Chooses up or down progress arrow depending on the percentage improvemnet
+  const ChooseImprovDirec = () => {
+    if (props.improvement_percent > 0) {
+      return (
+        <>
+          <ArrowUpwardIcon className={classes.differenceIcon} style={{fill: "green"}} />
+          <ImprovedText
+            className={classes.differenceValue}
+            variant = 'body2'
+          >
+            {props.improvement_percent} % 
+          </ImprovedText> 
+        </>
+      )
+    } else if (props.improvement_percent < 0) {
+      return (
+        <>
+          <ArrowDownwardIcon className={classes.differenceIcon} style={{fill: "red"}}/>
+          <DeclineText 
+            className={classes.differenceValue}
+            variant = 'body2'
+          >
+            {props.improvement_percent} % 
+          </DeclineText > 
+        </>
+      )
+    }
+  }
+
+  // Custom Typography for Improvement Indication
+  const ImprovedText = withStyles({
+    root: {
+      color: "green"
+    },
+  })(Typography);
+
+  // Custom Typography for Decline Indication
+  const DeclineText = withStyles({
+    root: {
+      color: "red"
+    },
+  })(Typography);
+
+  // Single Full ProgressBar Component
+  return (
+    <CardContent> 
+        <Grid
+          container
+          justify="space-between"
+          spacing = {1}
+        >
+          {/* Title */}
+          <Grid item>
+            <Typography
+              color = 'textSecondary'
+              gutterBottom
+              variant = "h6"
+            >
+              {props.exercise}
+            </Typography>
           </Grid>
-          
-
-          {/* Progress Bar */}
-          <Box mt={1}>
-            <LinearProgress
-              value = {this.props.exercise_progress_percent}
-              variant = "determinate"
-            />
-          </Box>
-          {/* Progress Bar */}
-
-          {/* Lower Stats Indicator */}
-          <Box mt = {1} 
-            display = "flex"
-            alignItems = "center"
+        </Grid>
+        {/* Progress Bar */}
+        <Box mt={1}>
+          <BorderLinearProgress
+            variant = 'determinate'
+            value = {props.exercise_progress_percent}
+          />
+        </Box>
+        {/* Lower Stats Indicator */}
+        <Box mt = {1} 
+          display = "flex"
+          alignItems = "center"
+        >
+          <Grid
+          container
+          justify = "space-between"
+          spacing={1}
           >
-            <Grid
-            container
-            justify = "space-between"
-            spacing={3}>
-              <Grid item>
+            <Grid item>
               <Typography
                 color = "textPrimary"
                 variant = 'h3'
               >
-                {this.props.exercise_progress_percent}%
+                {props.exercise_progress_percent}%
               </Typography>
-              </Grid>
-
-              <Grid item>
-                {/* Percentage Improvement */}
-                <Box mt = {1}
+            </Grid>
+            <Grid item>
+              {/* Percentage Improvement */}
+              <Box mt = {1}
                 display = "flex"
                 alignItems ='centre'
-                >
-                  <ArrowDownwardIcon className={classes.differenceIcon} />
-                  <ArrowUpwardIcon className={classes.differenceIcon} />
-                  <Typography 
-                  className={classes.differenceValue}
-                  variant = 'body2'>
-                    {this.props.improvement_percent} %
-                  </Typography> 
-                  
-                </Box>
-                <Typography 
-                  color = 'textSecondary'
-                  variant = "caption">
-                    Since Last Month
-                </Typography> 
-              </Grid> 
-              {/* Percentage Improvement */}
-            </Grid>
-          </Box>
-          {/* Lower Stats Indicator */}
-
-        </CardContent>
-    )
-  }
+              >
+                <ChooseImprovDirec/>
+                
+              </Box>           
+            </Grid> 
+          </Grid>
+        </Box>
+      </CardContent>
+  )
 }
 
 SingleProgressBar.propTypes = {
   className: PropTypes.string
 }
 export default SingleProgressBar
-
-
-// import clsx from 'clsx';
-
-// import { render } from 'nprogress';
-
-// const ExerciseProgress = ({className, ...rest})  => {
-//   const classes = useStyles();

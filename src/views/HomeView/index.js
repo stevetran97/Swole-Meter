@@ -6,6 +6,7 @@ import {
 
 import HomeProgressionWidget from "./Widgets/HomeProgressionWidget";
 import SummaryChartWidget from "./Widgets/SummaryChartWidget";
+import StrengthCompositionWidget from "./Widgets/StrengthCompositionWidget"
 
 import Page from '../../components/Page';
 
@@ -32,22 +33,33 @@ const HomeView = ({className, ...rest})  => {
             >
               <Grid
                 item
-                lg={3}
+                lg={6}
                 sm={6}
-                xl={3}
+                xl={6}
                 xs={12}
               >
                 <HomeProgressionWidget/>
               </Grid> 
               <Grid
                 item
-                lg={9}
-                sm={9}
-                xl={9}
-                xs={9}
+                lg={6}
+                sm={6}
+                xl={6}
+                xs={6}
               >
-                <SummaryChartWidget/>
-              </Grid>   
+                <StrengthCompositionWidget/>
+              </Grid>  
+
+              {/* New Row */}
+              <Grid
+                item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+              >
+                <SummaryChartWidget exercisestyle='ONE REP MAX'/>
+              </Grid>    
             </Grid>
         </Container>
       </Page>
