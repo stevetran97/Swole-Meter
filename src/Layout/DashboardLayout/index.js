@@ -1,3 +1,5 @@
+// This page determines the style of the Dashboard. The contents of the Navbar are not editted here.
+
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core';

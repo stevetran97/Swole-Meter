@@ -10,6 +10,7 @@ import {
   Divider,
   CardContent,
   Box,
+  Button
 } from '@material-ui/core'
 
 // Applies base style to the page
@@ -94,6 +95,24 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
         justifyContent="flex-end"
         p={2}
       >
+        <Button
+          size = "small"
+          variant = "h6"
+        >
+          ONE
+        </Button>
+        <Button
+          size = "small"
+          variant = "h6"
+        >
+          MUL
+        </Button>
+        <Button
+          size = "small"
+          variant = "h6"
+        >
+          TOT
+        </Button>
       </Box>
     </Card> 
   )

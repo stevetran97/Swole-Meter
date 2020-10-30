@@ -1,7 +1,10 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+
 import HomeView from "./views/HomeView";
 import DashboardLayout from "./Layout/DashboardLayout"
+// import BasePage from "./views/ExerciseView/BasePage.jsx";
+// import ExercisePage from "./views/ExerciseView/ExercisePage.jsx";
 
 const routes = [
   {
@@ -9,9 +12,9 @@ const routes = [
     element: <DashboardLayout/>,
     children: [
       {path: 'dashboard', element: <HomeView/>},
-      {path: 'squat', element: <HomeView/>},
-      {path: 'bench', element: <HomeView/>},
-      {path: 'deadlift', element: <HomeView/>}
+      {path: 'workouts/squat', element: <HomeView/>},
+      {path: 'workouts/bench', element: <HomeView/>},
+      {path: 'workouts/deadlift', element: <HomeView/>}
     ] 
   },
   {
@@ -33,5 +36,3 @@ export default routes;
 
 // import { Navigate } from 'hookrouter';
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import BasePage from "./components/Layout/BasePage.jsx";
-// import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";

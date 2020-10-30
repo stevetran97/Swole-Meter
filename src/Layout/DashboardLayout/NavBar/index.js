@@ -19,6 +19,18 @@ const items = [
     href: '/app/dashboard',
     title: 'Dashboard'
   },
+  {
+    href: '/app/workouts/squat',
+    title: 'Squat'
+  },
+  {
+    href: '/app/workouts/bench',
+    title: 'Bench'
+  },
+  {
+    href: '/app/workouts/deadlift',
+    title: 'Deadlift'
+  },
 ]
 
 const useStyles = makeStyles(() => ({
@@ -64,7 +76,7 @@ const NavBar = ({onMobileClose, openMobile}) => {
           color = "textPrimary"
           variant = "h5"
         >
-          TEST USERNAME TEXT
+          Contents
         </Typography>
       </Box>
       <Divider/>

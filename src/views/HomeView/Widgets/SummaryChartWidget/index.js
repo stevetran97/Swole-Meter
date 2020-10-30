@@ -49,7 +49,7 @@ const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
               size = "small"
               variant = "h6"
             >
-              REP
+              MUL
             </Button>
           </>
         )}

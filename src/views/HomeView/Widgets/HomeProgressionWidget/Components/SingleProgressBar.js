@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import PropTypes from 'prop-types'
 
 import {
-  Box, CardContent, Grid, LinearProgress, Typography, makeStyles, withStyles
+  Box, CardContent, Grid, LinearProgress, Typography, makeStyles, withStyles, Button
 } from '@material-ui/core'
 
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -17,28 +17,32 @@ const classes = makeStyles(() => ({
   },
 }));
 
-// Custom ProgressBar for Local Component use
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 10,
-    borderRadius: 5,
-  },
-  colorPrimary: {
-    backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
-  },
-  bar: {
-    borderRadius: 5,
-    backgroundColor: '#1a90ff',
-  },
-}))(LinearProgress);
-
-
-
-
 // Single Full ProgressBar Component
 function SingleProgressBar(props) {
 
-  // Chooses up or down progress arrow depending on the percentage improvemnet
+  // Custom ProgressBar for Local Component use
+  const BorderLinearProgress = withStyles((theme) => ({
+    root: {
+      height: 10,
+      borderRadius: 5,
+    },
+    colorPrimary: {
+      backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+    },
+    bar: {
+      borderRadius: 5,
+      backgroundColor: '#1a90ff',
+    },
+  }))(LinearProgress);
+
+  // FINISHED Custom ProgressBar for Local Component use
+  const FinishedBorderLinearProgress = withStyles((theme) => ({
+    colorPrimary: {
+      backgroundColor: theme.palette.green[theme.palette.type === 'light' ? 200 : 700],
+    },
+  }))(BorderLinearProgress);
+
+  // Chooses up or down progress arrow depending on the percentage improvement
   const ChooseImprovDirec = () => {
     if (props.improvement_percent > 0) {
       return (
@@ -104,6 +108,22 @@ function SingleProgressBar(props) {
     }
   }
 
+  // Green at 100% goal
+  const SetGoalButton = () => {
+    if (props.exercise_progress_percent >= 100) {
+      return (
+        <Button
+          color = "textPrimary"
+          variant = 'h3'
+        >
+          New Goal
+        </Button>
+      )
+    } else if (props.exercise_progress_percent <= 100) {
+      return <Box/>
+    }
+  }
+
   // Single Full ProgressBar Component
   return (
     <CardContent> 
@@ -121,6 +141,9 @@ function SingleProgressBar(props) {
               {props.exercise}
             </Typography>
           </Grid>
+          <Box>
+            <SetGoalButton/>
+          </Box>
         </Grid>
         <Box mt={1}>
           <BorderLinearProgress

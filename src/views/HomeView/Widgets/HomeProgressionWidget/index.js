@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types'
 import {
-  Card,  makeStyles, CardHeader, Button, Typography, Grid, Box
+  Card,  makeStyles, CardHeader, Button, Typography, Divider, Box
 } from '@material-ui/core'
 
 import SingleProgressBar from "./Components/SingleProgressBar";
@@ -41,6 +41,25 @@ const HomeProgressionWidget = ({className, ...rest})  => {
         <SingleProgressBar exercise = "DEADLIFT" improvement_percent = {-1} exercise_progress_percent = {100}/>
         <SingleProgressBar exercise = "SHOULDER PRESS" improvement_percent = {3} exercise_progress_percent = {90}/>
       </Card>
+      <Divider/>
+      <Box
+        display="flex"
+        justifyContent="flex-end"
+        p={2}
+      >
+        <Button
+          size = "small"
+          variant = "h6"
+        >
+          ONE
+        </Button>
+        <Button
+          size = "small"
+          variant = "h6"
+        >
+          MUL
+        </Button>
+      </Box>
     </Card>
   )
 }
