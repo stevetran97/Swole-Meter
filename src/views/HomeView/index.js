@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import {
   makeStyles, Container, Grid 
 } from '@material-ui/core'
@@ -67,10 +67,8 @@ const HomeView = ({className, ...rest})  => {
   )
 }
 
-// HomeView.propTypes = {
-//   className: PropTypes.string
-// }
+HomeView.propTypes = {
+  className: PropTypes.string
+}
 export default HomeView
 
-
-//CardContent, Grid, LinearProgress, Typography, Avatar, Box,

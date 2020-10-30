@@ -14,21 +14,20 @@ const Tab1_ONE_Chart = () => {
     datasets: [
       {
         backgroundColor: 'rgba(0, 65, 179, 0.91)',
-        data:[350, 355, 355, 0, 0, 365, 365],
+        data: [{x:'2020-11-1', y:300}, {x:'2020-11-2', y:303}, {x:'2020-11-3', y:305}, {x:'2020-11-4', y:310}],
         label:'Squat (lb)'
       },
       {
         backgroundColor: 'rgba(48, 95, 176, 0.8)',
-        data: [0, 0, 0, 0, 215, 220, 0, 0, 0, 225, 225],
+        data: [{x:'2020-11-1', y:200}, {x:'2020-11-2', y:203}, {x:'2020-11-3', y:205}, {x:'2020-11-4', y:210}],
         label:'Bench Press (lb)'
       },
       {
         backgroundColor: 'rgba(29, 105, 237, 0.67)',
-        data: [350, 350, 355, 0, 0, 0, 0, 370, 0, 0],
+        data: [{x:'2020-11-1', y:400}, {x:'2020-11-2', y:403}, {x:'2020-11-3', y:405}, {x:'2020-11-4', y:410}],
         label:'Deadlift (lb)'
       }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 Aug', '8 Aug', '9 Aug', '10 Aug', '11 Aug', '12 Aug', '13 Aug', '14 Aug', '15 Aug', '16 Aug', '17 Aug', '18 Aug', '19 Aug']
   };
 
   const options = {
@@ -41,12 +40,21 @@ const Tab1_ONE_Chart = () => {
     scales: {
       xAxes:  [
         {
+          type: 'time',
+          offset: true,
+          time: {
+            unit: 'day',
+            unitStepSize: 1,
+            displayFormats: {
+              'day': 'MMM DD',
+           }
+          },
           barThickness: 12,
           maxBarThickness: 12,
           barPercentage: 0.8,
           categoryPercentage: 0.8,
           ticks: {
-            fontColor: theme.palette.text.secondary
+            fontColor: theme.palette.text.secondary,
           },
           gridLines:  {
             display: true,

@@ -57,7 +57,7 @@ const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
         title = {exercisestyle.exercisestyle + ' ' +'RECORD'}
       />
       <Divider/> 
-
+      {/* Tab Contents here */}
       <Tab1_ONE_Chart/>
 
       <Divider/>
