@@ -3,7 +3,6 @@ import {
   CardContent,
   useTheme,
   Box,
-  colors
 } from '@material-ui/core'
 import { Bar } from 'react-chartjs-2'
 
