@@ -38,7 +38,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 // Single Full ProgressBar Component
 function SingleProgressBar(props) {
 
-  // // Chooses up or down progress arrow depending on the percentage improvemnet
+  // Chooses up or down progress arrow depending on the percentage improvemnet
   const ChooseImprovDirec = () => {
     if (props.improvement_percent > 0) {
       return (
@@ -81,6 +81,29 @@ function SingleProgressBar(props) {
     },
   })(Typography);
 
+  // Green at 100% goal
+  const GoalPercentageDisplay = () => {
+    if (props.exercise_progress_percent >= 100) {
+      return (
+        <ImprovedText
+          color = "textPrimary"
+          variant = 'h3'
+        >
+          {props.exercise_progress_percent}%
+        </ImprovedText>
+      )
+    } else if (props.exercise_progress_percent <= 100) {
+      return (
+        <Typography
+          color = "textPrimary"
+          variant = 'h3'
+        >
+          {props.exercise_progress_percent}%
+        </Typography>
+      )
+    }
+  }
+
   // Single Full ProgressBar Component
   return (
     <CardContent> 
@@ -89,7 +112,6 @@ function SingleProgressBar(props) {
           justify="space-between"
           spacing = {1}
         >
-          {/* Title */}
           <Grid item>
             <Typography
               color = 'textSecondary'
@@ -100,14 +122,12 @@ function SingleProgressBar(props) {
             </Typography>
           </Grid>
         </Grid>
-        {/* Progress Bar */}
         <Box mt={1}>
           <BorderLinearProgress
             variant = 'determinate'
             value = {props.exercise_progress_percent}
           />
         </Box>
-        {/* Lower Stats Indicator */}
         <Box mt = {1} 
           display = "flex"
           alignItems = "center"
@@ -118,21 +138,14 @@ function SingleProgressBar(props) {
           spacing={1}
           >
             <Grid item>
-              <Typography
-                color = "textPrimary"
-                variant = 'h3'
-              >
-                {props.exercise_progress_percent}%
-              </Typography>
+              <GoalPercentageDisplay/>
             </Grid>
             <Grid item>
-              {/* Percentage Improvement */}
               <Box mt = {1}
                 display = "flex"
                 alignItems ='centre'
               >
                 <ChooseImprovDirec/>
-                
               </Box>           
             </Grid> 
           </Grid>
