@@ -10,13 +10,18 @@ import {
   makeStyles,
 } from '@material-ui/core';
 
+// Icons
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
+// Custom Components
 import Tab1_ONE_Chart from './Components/Tab1_ONE_Chart'
+//  --------------------------------
+//  --------------------------------
 
 const useStyles = makeStyles(() => ({
   root:{}
 }));
+//  --------------------------------
 
 const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
   const classes = useStyles();
@@ -34,18 +39,8 @@ const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
       <CardHeader
         action={(
           <>
-            <Button
-              size = "small"
-              variant = "h6"
-            >
-              ONE
-            </Button>
-            <Button
-              size = "small"
-              variant = "h6"
-            >
-              MUL
-            </Button>
+            <Button size = "small" variant = "h6">ONE</Button>
+            <Button size = "small" variant = "h6">MUL</Button>
           </>
         )}
         
@@ -73,6 +68,9 @@ const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
     </Card>
   );
 };
+
+//  --------------------------------
+// Proptypes
 
 SummaryChartWidget.propTypes = {
   className: PropTypes.string
