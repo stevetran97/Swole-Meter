@@ -19,6 +19,8 @@ const App = () => {
 
 export default App;
 
+
+// ----------------------------------------------------------------
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 // import BasePage from "./components/Layout/BasePage.jsx";
 // import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";

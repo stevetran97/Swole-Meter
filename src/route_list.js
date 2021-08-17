@@ -12,9 +12,9 @@ const routes = [
     element: <DashboardLayout/>,
     children: [
       {path: 'dashboard', element: <HomeView/>},
-      {path: 'workouts/squat', element: <HomeView/>},
-      {path: 'workouts/bench', element: <HomeView/>},
-      {path: 'workouts/deadlift', element: <HomeView/>}
+      // {path: 'workouts/squat', element: <HomeView/>},
+      // {path: 'workouts/bench', element: <HomeView/>},
+      // {path: 'workouts/deadlift', element: <HomeView/>}
     ] 
   },
   {
@@ -28,11 +28,3 @@ const routes = [
 
 export default routes;
 
-
-
-
-// export default routes;
-
-
-// import { Navigate } from 'hookrouter';
-// import { BrowserRouter, Route, Switch } from "react-router-dom";

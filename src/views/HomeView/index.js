@@ -36,21 +36,22 @@ const HomeView = ({className, ...rest})  => {
           container
           spacing = {3}
         >
+          {/* Top Row */}
           <Grid
             item
             lg={6}
-            sm={6}
+            sm={12}
             xl={6}
-            xs={6}
+            xs={12}
           >
             <HomeProgressionWidget/>
           </Grid> 
           <Grid
             item
             lg={6}
-            sm={6}
+            sm={12}
             xl={6}
-            xs={6}
+            xs={12}
           >
             <StrengthCompositionWidget/>
           </Grid>  

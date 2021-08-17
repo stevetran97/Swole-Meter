@@ -95,22 +95,13 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
         justifyContent="flex-end"
         p={2}
       >
-        <Button
-          size = "small"
-          variant = "h6"
-        >
+        <Button style={{size: "small", variant: "h6"}}>
           ONE
         </Button>
-        <Button
-          size = "small"
-          variant = "h6"
-        >
+        <Button style={{size: "small", variant: "h6"}}>
           MUL
         </Button>
-        <Button
-          size = "small"
-          variant = "h6"
-        >
+        <Button style={{size: "small", variant: "h6"}}>
           TOT
         </Button>
       </Box>

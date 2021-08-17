@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Primary Single NavItem Component
 const NavItem = ({
   className, 
   href,

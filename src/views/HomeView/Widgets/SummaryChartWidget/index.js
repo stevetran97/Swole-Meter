@@ -39,8 +39,8 @@ const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
       <CardHeader
         action={(
           <>
-            <Button size = "small" variant = "h6">ONE</Button>
-            <Button size = "small" variant = "h6">MUL</Button>
+            <Button style={{size: "small", variant: "h6"}} >ONE</Button>
+            <Button style={{size: "small", variant: "h6"}} >MUL</Button>
           </>
         )}
         

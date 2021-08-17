@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -10,6 +11,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import Logo from './Logo';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -42,7 +44,10 @@ const TopBar = ({
               <MenuIcon/>
             </IconButton>
           </Hidden>
-          <Box flexGrow={1}/>
+          <Box flexGrow={1} />
+          <RouterLink to="/">
+            <Logo width={45}/>
+          </RouterLink>   
         </Toolbar>
     </AppBar>
   );

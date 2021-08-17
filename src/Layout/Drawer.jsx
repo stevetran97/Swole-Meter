@@ -94,7 +94,8 @@ function Drawer({ open, setOpen, history }) {
           const { text, icon, onClick } = item;
           return (
             <ListItem button key={text} onClick={onClick}>
-              {icon && <ListItemIcon>{icon}</ListItemIcon>}
+              {icon && <ListItemIcon><FitnessCenter /></ListItemIcon>}
+              <ListItemIcon><FitnessCenter /></ListItemIcon>
               <ListItemText key={text}>{text}</ListItemText>
             </ListItem>
           );

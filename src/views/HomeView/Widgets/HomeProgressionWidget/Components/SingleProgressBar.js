@@ -112,9 +112,10 @@ function SingleProgressBar(props) {
   const SetGoalButton = () => {
     if (props.exercise_progress_percent >= 100) {
       return (
-        <Button
-          color = "textPrimary"
-          variant = 'h3'
+        <Button style={{
+          color: "textPrimary",
+          variant: 'h3'
+        }}
         >
           New Goal
         </Button>
@@ -134,9 +135,8 @@ function SingleProgressBar(props) {
         >
           <Grid item>
             <Typography
-              color = 'textSecondary'
+              style={{color: 'textSecondary', variant: "h6"}}        
               gutterBottom
-              variant = "h6"
             >
               {props.exercise}
             </Typography>
