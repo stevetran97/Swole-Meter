@@ -18,7 +18,11 @@ import {
 
 // ----------------------------------------------------------------
 // Import Icons for Navbar items list
-import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import { 
+  FitnessCenter, 
+  AccountBox
+
+} from '@material-ui/icons';
 
 
 // ----------------------------------------------------------------
@@ -50,22 +54,22 @@ const workoutPageLinks = [
   {
     href: '/app/workouts/squat',
     title: 'Squat',
-    icon: FitnessCenterIcon
+    icon: FitnessCenter
   },
   {
     href: '/app/workouts/bench',
     title: 'Bench',
-    icon: FitnessCenterIcon
+    icon: FitnessCenter
   },
   {
     href: '/app/workouts/deadlift',
     title: 'Deadlift',
-    icon: FitnessCenterIcon
+    icon: FitnessCenter
   },
   {
     href: '/app/workouts/shoulderpress',
     title: 'Shoulder Press',
-    icon: FitnessCenterIcon
+    icon: FitnessCenter
   },
 ]
 
@@ -73,22 +77,22 @@ const workoutPageLinks = [
 const utilityLinks = [
   {
     href: '/app/account',
-    icon: FitnessCenterIcon,
+    icon: AccountBox,
     title: 'Account'
   },
   {
     href: '/app/settings',
-    icon: FitnessCenterIcon,
+    icon: AccountBox,
     title: 'Settings'
   },
   {
     href: '/login',
-    icon: FitnessCenterIcon,
+    icon: AccountBox,
     title: 'Login'
   },
   {
     href: '/register',
-    icon: FitnessCenterIcon,
+    icon: AccountBox,
     title: 'Register'
   }
 ]
@@ -100,6 +104,7 @@ const user = {
   name: 'Steve Tran'
 };
 
+// ----------------------------------------------------------------
 // Primary Export: Navbar Component
 const NavBar = ({onMobileClose, openMobile}) => {
   const classes = useStyles();
