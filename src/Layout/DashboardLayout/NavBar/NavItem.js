@@ -6,6 +6,7 @@ import {
   Button, 
   ListItem,
   makeStyles,
+  Typography
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,12 +28,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1)
   },
   title: {
-    marginRight: 'auto'
+    marginRight: 'auto',
+    fontSize: 18,
   },
   active: {
     color: theme.palette.primary.main,
     '& $title': {
-      fontWeight: theme.typography.fontWeightMedium
+      fontWeight: theme.typography.fontWeightMedium,
     },
     '& $icon':  {
       color: theme.palette.primary.main
@@ -65,12 +67,14 @@ const NavItem = ({
         {Icon && (
           <Icon
             className = {classes.icon}
-            size = "20"
+            style={{ fontSize: 20 }}
           />
         )}
-        <span className={classes.title}>
-          {title}
-        </span>
+        <Typography>
+          <span className={classes.title}>
+            {title}
+          </span>
+        </Typography>        
       </Button>
     </ListItem>
   );

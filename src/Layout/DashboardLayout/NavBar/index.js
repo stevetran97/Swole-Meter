@@ -20,6 +20,7 @@ import {
 // Import Icons for Navbar items list
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 
+
 // ----------------------------------------------------------------
 // Custom Components
 import NavItem from './NavItem'
@@ -44,8 +45,8 @@ const useStyles = makeStyles(() => ({
 
 // ----------------------------------------------------------------
 // States: 
-// Defines Routes, Text, and Material UI icon for Navbar
-const items = [
+// Workout Page Links -> Defines Routes, Text, and Material UI icon
+const workoutPageLinks = [
   {
     href: '/app/workouts/squat',
     title: 'Squat',
@@ -61,13 +62,42 @@ const items = [
     title: 'Deadlift',
     icon: FitnessCenterIcon
   },
+  {
+    href: '/app/workouts/shoulderpress',
+    title: 'Shoulder Press',
+    icon: FitnessCenterIcon
+  },
+]
+
+// Utilities -> Defines navbar item routes, text, and Material UI icon
+const utilityLinks = [
+  {
+    href: '/app/account',
+    icon: FitnessCenterIcon,
+    title: 'Account'
+  },
+  {
+    href: '/app/settings',
+    icon: FitnessCenterIcon,
+    title: 'Settings'
+  },
+  {
+    href: '/login',
+    icon: FitnessCenterIcon,
+    title: 'Login'
+  },
+  {
+    href: '/register',
+    icon: FitnessCenterIcon,
+    title: 'Register'
+  }
 ]
 
 // User data placeholder: Defines current user logged in
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  userExpLevel: 'Advanced Dead Lifter',
-  name: 'Kat Smith'
+  avatar: '/static/images/avatars/avatar_creator.jpg',
+  userExpLevel: 'Intermediate Dead Lifter',
+  name: 'Steve Tran'
 };
 
 // Primary Export: Navbar Component
@@ -137,7 +167,7 @@ const NavBar = ({onMobileClose, openMobile}) => {
       <Divider/>
       <Box p={2}>
         <List>
-          {items.map((item) => (
+          {workoutPageLinks.map((item) => (
             <NavItem
               href = {item.href}
               key={item.title}
@@ -149,7 +179,18 @@ const NavBar = ({onMobileClose, openMobile}) => {
       </Box>
       <Box flexGrow ={1}/>
       {/* Navbar Options Start */}
-      {/* Links to Options, Settings, Account etc. */}
+      <Box p={2}>
+        <List>
+          {utilityLinks.map((item) => (
+            <NavItem
+              href = {item.href}
+              key={item.title}
+              title={item.title}
+              icon={item.icon}
+            />
+          ))}
+        </List>
+      </Box>
     </Box>
   );
 
