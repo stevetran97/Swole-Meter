@@ -15,9 +15,9 @@ import {
 
 // ---------------------------------
 // Custom Components
-import Tab1_ONE_Progress from './Components/Tab1_ONE_Progress'
-import Tab2_REP_Progress from './Components/Tab2_REP_Progress'
-import Tab3_TOT_Progress from './Components/Tab3_TOT_Progress'
+import Tab1_ONE_Composition from './Components/Tab1_ONE_Composition'
+import Tab2_REP_Composition from './Components/Tab2_REP_Composition'
+import Tab3_TOT_Composition from './Components/Tab3_TOT_Composition'
 
 // ----------------------------------------------------------------
 // Styles
@@ -74,9 +74,9 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
       />
       <Divider/>
 
-      {strCompTabIdx=="stcwONE" && <Tab1_ONE_Progress/>} 
-      {strCompTabIdx=="stcwREP" &&<Tab2_REP_Progress/>} 
-      {strCompTabIdx=="stcwTOT" &&<Tab3_TOT_Progress/>} 
+      {strCompTabIdx=="stcwONE" && <Tab1_ONE_Composition/>} 
+      {strCompTabIdx=="stcwREP" &&<Tab2_REP_Composition/>} 
+      {strCompTabIdx=="stcwTOT" &&<Tab3_TOT_Composition/>} 
 
       <Divider/>
       <Box
