@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {
-  makeStyles, Container, Grid 
+  makeStyles, Container, Grid
 } from '@material-ui/core'
 
 import Page from '../../components/Page';
@@ -13,6 +13,7 @@ import SummaryChartWidget from "./Widgets/SummaryChartWidget";
 import StrengthCompositionWidget from "./Widgets/StrengthCompositionWidget"
 //  --------------------------------
 
+// Styling
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -23,18 +24,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //  --------------------------------
-
-const HomeView = ({className, ...rest})  => {
+// Main Dashboard Component
+const HomeView = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Page className = {classes.root}
-      title = "Dashboard"
+    <Page className={classes.root}
+      title="Dashboard"
     >
-      <Container maxWidth = "lg">
+      <Container maxWidth="lg">
         <Grid
           container
-          spacing = {3}
+          spacing={3}
         >
           {/* Top Row */}
           <Grid
@@ -44,8 +45,8 @@ const HomeView = ({className, ...rest})  => {
             xl={6}
             xs={12}
           >
-            <HomeProgressionWidget/>
-          </Grid> 
+            <HomeProgressionWidget />
+          </Grid>
           <Grid
             item
             lg={6}
@@ -53,8 +54,8 @@ const HomeView = ({className, ...rest})  => {
             xl={6}
             xs={12}
           >
-            <StrengthCompositionWidget/>
-          </Grid>  
+            <StrengthCompositionWidget />
+          </Grid>
 
           {/* New Row */}
           <Grid
@@ -64,8 +65,8 @@ const HomeView = ({className, ...rest})  => {
             xl={12}
             xs={12}
           >
-            <SummaryChartWidget exercisestyle='ONE REP MAX'/>
-          </Grid>    
+            <SummaryChartWidget/>
+          </Grid>
         </Grid>
       </Container>
     </Page>

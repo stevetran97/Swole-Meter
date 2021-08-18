@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -15,6 +15,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 // Custom Components
 import Tab1_ONE_Chart from './Components/Tab1_ONE_Chart'
+import Tab2_REP_Chart from './Components/Tab2_REP_Chart'
 //  --------------------------------
 //  --------------------------------
 
@@ -23,12 +24,16 @@ const useStyles = makeStyles(() => ({
 }));
 //  --------------------------------
 
-const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
+const SummaryChartWidget  = ({className, ...rest})  =>  {
   const classes = useStyles();
 
-  const [HomeChartTab, setHomeChartTab] = React.useState(0); 
-  const handleHomeChartTabChange = (event, newHomeChartTab) => {
-    setHomeChartTab(newHomeChartTab)
+  const [sumChartTabIdx, setSumChartTabIdx] = useState("scwONE"); 
+  const [widgTitle, setWidgTitle] = useState("ONE REP MAX")
+
+  const handleTabChange = (newTabID) => {
+    setSumChartTabIdx(newTabID)
+    if (newTabID=="scwONE") {setWidgTitle("ONE REP MAX")}
+    else if (newTabID=="scwREP") {setWidgTitle("MULTI REP")}
   }
 
   return  (
@@ -39,17 +44,16 @@ const SummaryChartWidget  = (exercisestyle, {className, ...rest})  =>  {
       <CardHeader
         action={(
           <>
-            <Button style={{size: "small", variant: "h6"}} >ONE</Button>
-            <Button style={{size: "small", variant: "h6"}} >MUL</Button>
+            <Button style={{size: "small", variant: "h6"} } id="scwONE" onClick={()=>{handleTabChange("scwONE")}}>ONE</Button>
+            <Button style={{size: "small", variant: "h6"} } id="scwREP" onClick={()=>{handleTabChange("scwREP")}}>REP</Button>
           </>
         )}
-        
-        title = {exercisestyle.exercisestyle + ' ' +'RECORD'}
+        title = {widgTitle + ' ' +'RECORD'}
       />
       <Divider/> 
-      {/* Tab Contents here */}
-      <Tab1_ONE_Chart/>
-
+      {/* Tab Contents Conditional Render */}
+      {sumChartTabIdx=="scwONE" && <Tab1_ONE_Chart/>}
+      {sumChartTabIdx=="scwREP" && <Tab2_REP_Chart/>}
       <Divider/>
       <Box
         display="flex"
