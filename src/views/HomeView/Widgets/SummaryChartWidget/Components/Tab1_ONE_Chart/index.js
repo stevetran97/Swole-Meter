@@ -8,8 +8,6 @@ import { Bar } from 'react-chartjs-2'
 
 const Tab1_ONE_Chart = (props) => {
   const theme = useTheme()
-
-
   // Data object rendered by chart: Pass excercise data here through props
   const data = {
     datasets: [
