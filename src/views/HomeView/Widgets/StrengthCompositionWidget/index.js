@@ -13,11 +13,21 @@ import {
   Button
 } from '@material-ui/core'
 
+// ----------------------------------------------------------------
+// Styles
 // Applies base style to the page
 const useStyles = makeStyles(() => ({
   root:{}
 }));
 
+// Modified card style. Only card related
+var cardStyle = {
+  display: 'block',
+  transitionDuration: '0.3s',
+  height: "100%",
+}
+
+// ----------------------------------------------------------------
 // Primary Widget Function
 const StrengthCompositionWidget = ({className, ...rest}) => {
   // Create styles within the function
@@ -64,12 +74,6 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
     }
   };
 
-  // Modified card style. Only card related
-  var cardStyle = {
-    display: 'block',
-    transitionDuration: '0.3s',
-  }
-
   // Returned widget
   return(
     <Card
@@ -79,11 +83,12 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
     >
       <CardHeader
         title = "WORK"
+        height={10}
       />
       <Divider/>
       <CardContent>
         <Box
-          height={450}
+          height={500}
           position="relative"
         >
           <Radar data={data} options={options}/> 
@@ -93,7 +98,8 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
       <Box
         display="flex"
         justifyContent="flex-end"
-        p={2}
+        p={1}
+        height={50}
       >
         <Button style={{size: "small", variant: "h6"}}>
           ONE

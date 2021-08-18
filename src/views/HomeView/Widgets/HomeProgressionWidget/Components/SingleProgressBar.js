@@ -9,17 +9,16 @@ import {
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
-
-// Styles for ProgressBar Component
+// Styles
 const classes = makeStyles(() => ({
   root: {
-    height: '100%'
+    height: '100%',
   },
 }));
 
-// Single Full ProgressBar Component
+// Primary Widget Component: Single ProgressBar Row Component
 function SingleProgressBar(props) {
-
+  // Progress Bar Conditional Styling and Helpers
   // Custom ProgressBar for Local Component use
   const BorderLinearProgress = withStyles((theme) => ({
     root: {
@@ -85,6 +84,7 @@ function SingleProgressBar(props) {
     },
   })(Typography);
 
+
   // Green at 100% goal
   const GoalPercentageDisplay = () => {
     if (props.exercise_progress_percent >= 100) {
@@ -125,7 +125,6 @@ function SingleProgressBar(props) {
     }
   }
 
-  // Single Full ProgressBar Component
   return (
     <CardContent> 
         <Grid
@@ -151,7 +150,7 @@ function SingleProgressBar(props) {
             value = {props.exercise_progress_percent}
           />
         </Box>
-        <Box mt = {1} 
+        <Box mt={1} 
           display = "flex"
           alignItems = "center"
         >

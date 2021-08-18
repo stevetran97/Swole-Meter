@@ -18,7 +18,6 @@ import Tab1_ONE_Chart from './Components/Tab1_ONE_Chart'
 import Tab2_REP_Chart from './Components/Tab2_REP_Chart'
 //  --------------------------------
 //  --------------------------------
-
 const useStyles = makeStyles(() => ({
   root:{}
 }));
@@ -43,10 +42,10 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
     >
       <CardHeader
         action={(
-          <>
+          <Box height={10}>
             <Button style={{size: "small", variant: "h6"} } id="scwONE" onClick={()=>{handleTabChange("scwONE")}}>ONE</Button>
             <Button style={{size: "small", variant: "h6"} } id="scwREP" onClick={()=>{handleTabChange("scwREP")}}>REP</Button>
-          </>
+          </Box>
         )}
         title = {widgTitle + ' ' +'RECORD'}
       />
@@ -58,7 +57,8 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
       <Box
         display="flex"
         justifyContent="flex-end"
-        p={2}
+        p={1}
+        height={50}
       >
         <Button
           color='primary'
