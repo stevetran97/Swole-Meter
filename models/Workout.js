@@ -1,6 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const WorkoutSchema = new mongoose.Schema({
+let WorkoutSchema = new mongoose.Schema({
+  _id: mongoose.Types.ObjectId,
   time: Date,
   weight: Number,
   reps: Number,
@@ -13,7 +14,7 @@ const WorkoutSchema = new mongoose.Schema({
       ref: "User"
     }
   }
-})
+});
 
-let Workout = mongoose.model("Workout", WorkoutSchema)
-module.exports(Workout)
+let Workout = mongoose.model("Workout", WorkoutSchema);
+module.exports = Workout;

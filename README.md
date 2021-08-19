@@ -33,3 +33,10 @@ TODO:
 - Add Home button to navigate to landing page
 - Logouts
 - Modify user settings
+
+### Usage:
+
+## Development Server:
+
+To run the app in development mode:
+nodemon app.js

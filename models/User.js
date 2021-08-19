@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 let UserSchema = new mongoose.Schema({
+  _id: mongoose.Types.ObjectId,
   username: String, 
   firstName: String,
   lastName: String,
@@ -29,9 +30,9 @@ let UserSchema = new mongoose.Schema({
       best_shoulderp_work: Number
     }
   }
-})
+});
 
-UserSchema.plugin(passportLocalMongoose)
+UserSchema.plugin(passportLocalMongoose);
 
-let User = mongoose.model("User", UserSchema)
-module.exports = User
+let User = mongoose.model("User", UserSchema);
+module.exports = User;
