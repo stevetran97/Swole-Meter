@@ -10,6 +10,8 @@ import ExercisePageContent from "./ExercisePageContent";
 
 export default function ExercisePage({ exercise }) {
   const theme = useTheme();
+
+  // States
   const [date, setDate] = useState(new Date());
   const [tabIndex, setTabIndex] = useState(0);
   const [workoutData, setWorkoutData] = useState({
@@ -23,6 +25,7 @@ export default function ExercisePage({ exercise }) {
     },
   });
 
+  // Helpers
   const formatDataForChart = (data, field) => {
     const arr = [];
     for (let i = 0; i < data.length; i++) {
@@ -31,9 +34,11 @@ export default function ExercisePage({ exercise }) {
     return arr;
   };
 
+  // useEffects
   // Will fetch if user changes date.
   useEffect(() => {
     async function fetchExerciseData() {
+      // Get Workout data into variables
       const workoutJSON = await fetchData({
         url: `http://${window.location.hostname}:8080/api/sets`,
         date: date,
@@ -46,6 +51,7 @@ export default function ExercisePage({ exercise }) {
         exercise: exercise,
       });
 
+      // Pull workout data into directly into state as data
       setWorkoutData({
         workouts: {
           data: workoutJSON,
@@ -66,6 +72,7 @@ export default function ExercisePage({ exercise }) {
     // bench".
   }, [date, exercise]);
 
+  // Primary Excercise Page Component Return
   return (
     <Grid item container>
       <Grid item xs={false} sm={1} md={2} xl={3} />
@@ -134,6 +141,7 @@ export default function ExercisePage({ exercise }) {
 // obj = {url: string, exercise: string, date: date}
 async function fetchData(obj) {
   const { url, exercise, date } = obj;
+
   const response = await fetch(url, {
     mode: "cors",
     credentials: "include",

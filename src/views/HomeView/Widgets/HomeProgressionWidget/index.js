@@ -22,9 +22,17 @@ var cardStyle = {
   transitionDuration: '0.3s'
 }
 
+
+
 // Primary Component: Progression Widget
 const HomeProgressionWidget = ({className, ...rest})  => {
   const classes = useStyles();
+
+  // Data Placeholder
+  const data = {
+    one_rep: {},
+    one_rep: {},
+  }
 
   // States
   const [progTabIdx, setProgTabIdx] = useState("hpwONE")
@@ -60,8 +68,8 @@ const HomeProgressionWidget = ({className, ...rest})  => {
         )}
       />
       <Divider/>
-        {progTabIdx=="hpwONE" && <Tab1_ONE_Progress/>}
-        {progTabIdx=="hpwREP" && <Tab2_REP_Progress/>}
+      {progTabIdx=="hpwONE" && <Tab1_ONE_Progress/>}
+      {progTabIdx=="hpwREP" && <Tab2_REP_Progress/>}
       <Divider/>
       <Box
         display="flex"
