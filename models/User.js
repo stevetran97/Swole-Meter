@@ -10,6 +10,7 @@ let UserSchema = new mongoose.Schema(
     firstName: String,
     lastName: String,
     password: String,
+    email: String,
     profile: String,
     workouts: [
       {

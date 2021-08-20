@@ -22,8 +22,6 @@ var cardStyle = {
   transitionDuration: '0.3s'
 }
 
-
-
 // Primary Component: Progression Widget
 const HomeProgressionWidget = ({className, ...rest})  => {
   const classes = useStyles();

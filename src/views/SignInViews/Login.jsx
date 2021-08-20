@@ -43,11 +43,13 @@ const Login = () => {
               password: Yup.string().max(255).required("Password is required")
             })}
             // Function for handling post request to login: Not finished
-            onSubmit = {() => {
+            onSubmit = {(values, actions) => {
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                actions.setSubmitting(false);
 
-
-
-              navigate('/app/dashboard', { replace: true })
+                // Add api call to validate user and redirect to dashboard
+              }, 1000);
             }}
           >
             {({

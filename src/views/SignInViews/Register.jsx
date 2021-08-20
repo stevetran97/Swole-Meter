@@ -15,6 +15,9 @@ import {
   Typography
 } from '@material-ui/core';
 
+// For Sign in calls
+import axios from 'axios'
+
 const Register = () => {
   const navigate = useNavigate();
 
@@ -50,8 +53,13 @@ const Register = () => {
                 policy: Yup.boolean().oneOf([true], "This field must be checked")
               })
             }
-            onSubmit={()=>{
-              navigate('/app/dashboard', { replace: true })
+            onSubmit={(values, actions) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  actions.setSubmitting(false);
+                }, 1000);
+
+                // Add api call to create user and redirect to dashboard
             }}
           >
             {({
