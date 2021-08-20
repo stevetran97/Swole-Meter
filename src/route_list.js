@@ -6,22 +6,28 @@ import DashboardLayout from "./Layout/DashboardLayout"
 // import BasePage from "./views/ExerciseView/BasePage.jsx";
 // import ExercisePage from "./views/ExerciseView/ExercisePage.jsx";
 
+import Login from './views/SignInViews/Login.jsx'
+import Register from './views/SignInViews/Register.jsx'
+
 const routes = [
   {
     path: 'app',
-    element: <DashboardLayout/>,
+    element: <DashboardLayout />,
     children: [
-      {path: 'dashboard', element: <HomeView/>},
+      { path: 'dashboard', element: <HomeView /> },
       // {path: 'workouts/squat', element: <HomeView/>},
       // {path: 'workouts/bench', element: <HomeView/>},
       // {path: 'workouts/deadlift', element: <HomeView/>}
-    ] 
+
+    ]
   },
   {
     path: '/',
-    element: <DashboardLayout/>,
+    element: <DashboardLayout />,
     children: [
-      {path: '/', element: <Navigate to="/app/dashboard"/>  }
+      { path: 'login', element: <Login/> },
+      { path: 'register', element: <Register />},
+      { path: '/', element: <Navigate to="/app/dashboard" /> }
     ]
   }
 ];
