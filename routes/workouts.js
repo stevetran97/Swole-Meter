@@ -14,7 +14,7 @@ const isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next()
   }
-  req.flash("Error: ", "Please sign in to continue")
+  req.flash("error", "Please sign in to continue")
   res.redirect("/user/login")
 }
 
