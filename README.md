@@ -39,9 +39,10 @@ TODO:
 ## Development Backend Server:
 
 To run the front end
+cd into the client folder
 npm start
 
 ## Development Backend Server:
 
 To run the app in development mode:
-nodemon app.js
+nodemon server.js from this directory
