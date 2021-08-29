@@ -39,24 +39,29 @@ const Register = () => {
           <Formik
             initialValues={{
               email: "",
-              firstName: "",
-              lastName: "", 
+              firstname: "",
+              lastname: "", 
               password: "",
               policy: false
             }}
             validationSchema={
               Yup.object().shape({
                 email: Yup.string().email("Please enter a valid email").max(255).required("Email is required"),
-                firstName: Yup.string().max(255).required("First name is required"),
-                lastName: Yup.string().max(255).required("Last name is required"),
+                firstname: Yup.string().max(255).required("First name is required"),
+                lastname: Yup.string().max(255).required("Last name is required"),
                 password: Yup.string().max(255).required("Password is required"),
                 policy: Yup.boolean().oneOf([true], "This field must be checked")
               })
             }
             onSubmit={(values, actions) => {
                 setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
+                  // alert(JSON.stringify(values, null, 2));
                   actions.setSubmitting(false);
+
+                  axios.post("/user/register", JSON.stringify(values, null, 2))
+                    .then(()=>alert("Post successful"))
+                    .catch((e)=>console.log(e))
+
                 }, 1000);
 
                 // Add api call to create user and redirect to dashboard
@@ -89,28 +94,28 @@ const Register = () => {
                 </Box>
                 {/* First Name Input */}
                 <TextField 
-                  error={Boolean(touched.firstName && errors.firstName)}
+                  error={Boolean(touched.firstname && errors.firstname)}
                   fullWidth
-                  helperText={touched.firstName && errors.firstName}
+                  helperText={touched.firstname && errors.firstname}
                   label="First name"
                   margin="normal"
-                  name="firstName"
+                  name="firstname"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
+                  value={values.firstname}
                   variant="outlined"
                 />
                 {/* Last Name Input */}
                 <TextField 
-                  error={Boolean(touched.lastName && errors.lastName)}
+                  error={Boolean(touched.lastname && errors.lastname)}
                   fullWidth
-                  helperText={touched.lastName && errors.lastName}
+                  helperText={touched.lastname && errors.lastname}
                   label="Last name"
                   margin="normal"
-                  name="lastName"
+                  name="lastname"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.lastName}
+                  value={values.lastname}
                   variant="outlined"
                 />
                 {/* Email Input */}

@@ -15,6 +15,8 @@ const App = () => {
 
   const routing = useRoutes(routes);
 
+  console.log("routing: ",routing)
+
   return (
     <ThemeProvider theme={theme}>
       <DefaultStyle />

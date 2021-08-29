@@ -36,7 +36,12 @@ TODO:
 
 ### Usage:
 
-## Development Server:
+## Development Backend Server:
+
+To run the front end
+npm start
+
+## Development Backend Server:
 
 To run the app in development mode:
 nodemon app.js

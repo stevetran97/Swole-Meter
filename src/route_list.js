@@ -22,12 +22,20 @@ const routes = [
     ]
   },
   {
-    path: '/',
+    path: 'user',
+    // Need to remove this and change it to some MainLayout without Dashboard side bar
     element: <DashboardLayout />,
     children: [
       { path: 'login', element: <Login/> },
       { path: 'register', element: <Register />},
-      { path: '/', element: <Navigate to="/app/dashboard" /> }
+    ]
+  },
+  {
+    path: '/',
+    // Need to remove this and change it to some MainLayout without Dashboard side bar
+    element: <DashboardLayout />,
+    children: [
+      { path: '/', element: <Navigate to="/login" /> }
     ]
   }
 ];
