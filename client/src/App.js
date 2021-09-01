@@ -15,8 +15,6 @@ const App = () => {
 
   const routing = useRoutes(routes);
 
-  console.log("routing: ",routing)
-
   return (
     <ThemeProvider theme={theme}>
       <DefaultStyle />
@@ -27,9 +25,3 @@ const App = () => {
 
 export default App;
 
-
-// ----------------------------------------------------------------
-// import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import BasePage from "./components/Layout/BasePage.jsx";
-// import ExercisePage from "./components/ExerciseLayout/ExercisePage.jsx";
-// import HomePage from "./components/HomeLayout/Home.jsx";

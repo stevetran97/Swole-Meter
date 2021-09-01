@@ -6,9 +6,10 @@ import DashboardLayout from "./Layout/DashboardLayout"
 // import BasePage from "./views/ExerciseView/BasePage.jsx";
 // import ExercisePage from "./views/ExerciseView/ExercisePage.jsx";
 
-import Login from './views/SignInViews/Login.jsx'
-import Register from './views/SignInViews/Register.jsx'
+import Login from './views/SignInViews/Login'
+import Register from './views/SignInViews/Register'
 
+// Primary Route Junction
 const routes = [
   {
     path: 'app',
@@ -18,16 +19,6 @@ const routes = [
       // {path: 'workouts/squat', element: <HomeView/>},
       // {path: 'workouts/bench', element: <HomeView/>},
       // {path: 'workouts/deadlift', element: <HomeView/>}
-
-    ]
-  },
-  {
-    path: 'user',
-    // Need to remove this and change it to some MainLayout without Dashboard side bar
-    element: <DashboardLayout />,
-    children: [
-      { path: 'login', element: <Login/> },
-      { path: 'register', element: <Register />},
     ]
   },
   {
@@ -35,7 +26,9 @@ const routes = [
     // Need to remove this and change it to some MainLayout without Dashboard side bar
     element: <DashboardLayout />,
     children: [
-      { path: '/', element: <Navigate to="/user/login" /> }
+      { path: 'login', element: <Login /> },
+      { path: 'register', element: <Register /> },
+      { path: '/', element: <Navigate to="/login" /> }
     ]
   }
 ];

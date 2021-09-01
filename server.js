@@ -1,87 +1,57 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const expressSession = require("express-session");
-// Import Passport strategy for User Authen
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
+const config = require('./config');
+const cors = require('cors');
 
-
-const dotenv = require("dotenv");
-const flash = require("connect-flash")
-
-// Import Database Models
-const Workout = require("./models/Workout")
-const User = require("./models/User")
-const Exercise = require("./models/Exercise")
-
-// Import routes
-const routes = require("./routes");
-
-dotenv.config();
+// Connect to Mongoose database and load models
+require('./server/models').connect(config.dbUri);
 
 const app = express();
-app.use( bodyParser.json() );       
-app.use( bodyParser.urlencoded() ); 
 
-app.use(
-  expressSession({
-    secret: "secretKey",
-    resave: false,
-    saveUnitialized: false 
-  })
-)
+// ----------------------------------------------------------------
+app.use(cors());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+// ----------------------------------------------------------------
 
+
+// Load static files at following directories
+app.use(express.static("public"));
+
+// Tell app to parse HTTP body messages
+app.use(bodyParser.urlencoded({ extended: false }))
+// Tell app to parse JSON
+app.use(bodyParser.json() );       
+app.use(bodyParser.urlencoded() ); 
 
 // Setup passport for authentification
 app.use(passport.initialize());
-app.use(passport.session());
 
+// Load Passport Authentication Strategies
+const localSignupStrategy = require('./server/passport/local-signup');
+const localLoginStrategy = require('./server/passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// Assign auth-check middleware to run before protected api routes.
+const authCheckMiddleware = require('./server/middleware/auth-check');
+app.use('/api', authCheckMiddleware);
 
-// ----------------------------------------------------------------
-// Middleware
-app.use(bodyParser.urlencoded({ extended:true }))
-app.use(express.static("public"))
+// Import routes
+const authRoutes = require("./server/routes/auth");
+const apiRoutes = require("./server/routes/api");
+app.use("/auth", authRoutes);
+app.use("/api", apiRoutes);
 
-app.use(flash());
+// Set port and listen on server
+app.set('port', (process.env.PORT || config.backendPort));
 
-// Connect to Swolemeter's MongoDB Cluster
-
-// const serverAddress = 'mongo:27017'
-// const databaseAddress = 'swole-meter'
-
-mongoose.connect(
-  "mongodb://localhost/swole-meter",
-  { useNewUrlParser: true ,useUnifiedTopology: true}
-)
-.then(() => { console.log("[SERVERINFO]\nMONGOOSE CONNECTION SUCCESSFUL\n") })
-.catch(() => { console.log("[SERVERINFO]\n MONGOOSE CONNECTION FAILED\n") })
-
-
-// ----------------------------------------------------------------
-// Global Variables
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  res.locals.login = req.isAuthenticated();
-  res.locals.error = req.flash("error");
-  res.locals.success = req.flash("success");
-
-  console.log("Checkpoint: req recieved")
-
-  next();
-})
-
-app.use("/api", ...routes);
-
-// Standard Port
-const PORT = process.env.PORT || 3000;
-
-const server = app.listen(PORT, () => {  
-  console.log("App is running on port: " + PORT);
+app.listen(app.get('port'), () => {  
+  console.log("App is running on port: " + app.get('port'));
 });
 
 

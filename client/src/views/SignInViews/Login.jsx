@@ -118,7 +118,7 @@ const Login = () => {
                   {' '}
                   <Link
                     component={RouterLink}
-                    to="/user/register"
+                    to="/register"
                     variant="h6"
                   >
                     Sign up
