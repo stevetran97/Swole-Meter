@@ -1,0 +1,5 @@
+{
+  "dbUri": "mongodb://localhost/swole-meter",
+  "jwtSecret": "Secret Key Placeholder",
+  "backendPort": 5000
+}
