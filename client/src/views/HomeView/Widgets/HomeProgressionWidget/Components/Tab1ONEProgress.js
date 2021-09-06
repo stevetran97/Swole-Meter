@@ -1,17 +1,11 @@
 import React from 'react'
 
-import { CardContent, Box, useTheme } from '@material-ui/core'
-
+import { CardContent, Box } from '@material-ui/core'
 
 // Custom Components 
 import SingleProgressBar from './Components/SingleProgressBar'
 
-
-const Tab1_ONE_Progress = () => {
-
-
-
-
+const Tab1ONEProgress = () => {
   return(
     <CardContent>
       <Box
@@ -27,5 +21,4 @@ const Tab1_ONE_Progress = () => {
   )
 }
 
-
-export default Tab1_ONE_Progress
+export default Tab1ONEProgress

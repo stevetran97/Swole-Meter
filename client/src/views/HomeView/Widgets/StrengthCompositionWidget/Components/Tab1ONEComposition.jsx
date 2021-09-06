@@ -7,7 +7,7 @@ import {
 
 import { Radar } from 'react-chartjs-2'
 
-const Tab1_ONE_Composition = () => {
+const Tab1ONEComposition = () => {
   const theme = useTheme()
 
   // Data object rendered by chart: Pass excercise data here through props
@@ -62,4 +62,4 @@ const Tab1_ONE_Composition = () => {
   ) 
 }
 
-export default Tab1_ONE_Composition
+export default Tab1ONEComposition

@@ -2,21 +2,18 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types'
 import {
-  Card, CardContent,  makeStyles, CardHeader, Button, Typography, Divider, Box
+  Card,  makeStyles, CardHeader, Button, Typography, Divider, Box
 } from '@material-ui/core'
 
 // Custom Components
-import Tab1_ONE_Progress from "./Components/Tab1_ONE_Progress.js";
-import Tab2_REP_Progress from "./Components/Tab2_REP_Progress.js";
-
-
+import Tab1ONEProgress from "./Components/Tab1ONEProgress.js";
+import Tab2REPProgress from "./Components/Tab2REPProgress.js";
 
 // Styles
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-// Modified card style. Only card related
 var cardStyle = {
   display: 'block',
   transitionDuration: '0.3s'
@@ -27,10 +24,7 @@ const HomeProgressionWidget = ({className, ...rest})  => {
   const classes = useStyles();
 
   // Data Placeholder
-  const data = {
-    one_rep: {},
-    one_rep: {},
-  }
+
 
   // States
   const [progTabIdx, setProgTabIdx] = useState("hpwONE")
@@ -39,9 +33,8 @@ const HomeProgressionWidget = ({className, ...rest})  => {
   // Helpers
   const handleTabChange = (newTabIdx) => {
     setProgTabIdx(newTabIdx)
-
-    if (newTabIdx == "hpwONE") {setProgWidgTitle("ONE REP MAX")}
-    else if (newTabIdx == "hpwREP") {setProgWidgTitle("MULTI REP")}
+    if (newTabIdx === "hpwONE") {setProgWidgTitle("ONE REP MAX")}
+    else if (newTabIdx === "hpwREP") {setProgWidgTitle("MULTI REP")}
   }
 
   return (
@@ -66,8 +59,8 @@ const HomeProgressionWidget = ({className, ...rest})  => {
         )}
       />
       <Divider/>
-      {progTabIdx=="hpwONE" && <Tab1_ONE_Progress/>}
-      {progTabIdx=="hpwREP" && <Tab2_REP_Progress/>}
+      {progTabIdx === "hpwONE" && <Tab1ONEProgress/>}
+      {progTabIdx === "hpwREP" && <Tab2REPProgress/>}
       <Divider/>
       <Box
         display="flex"

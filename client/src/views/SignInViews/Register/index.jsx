@@ -1,59 +1,35 @@
-import React, { useState } from 'react'
-
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import {
-  Box,
-  Container,
-} from '@material-ui/core';
-
-// For Sign in calls
-import axios from 'axios'
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import RegisterForm from './RegisterForm'
 
+import { signupUser, useAuthState, useAuthDispatch } from '../../../context'
+
 const Register = () => {
-  // States
+  // Context
+  const dispatch = useAuthDispatch();
+  // Hooks
   const navigate = useNavigate();
-
-  const [errors, setErrors] = useState({});
-  const [user, setUser] = useState({
-    email: '',
-    name:'',
-    password: ''
-  });
-
-  // useEffects
+  // States
+  const { errorMessage } = useAuthState();
 
   // Helpers
-  const handleSubmit = (values, actions) => {
-
-  }
+  const handleSubmit = async (values) => {
+    try {
+      let response = await signupUser(dispatch, values);
+      if (!response) throw new Error('No response');
+      navigate('/login');
+    } catch (error) {
+      console.log(error);
+    };
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>Register | Swolemeter</title>
-      </Helmet>
-      <Box
-        style = {{
-          backgroundColor: 'background.default',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          justifyContent: 'center'
-        }}
-      >
-        <Container maxWidth="sm">
-          <RegisterForm/>
-        </Container>
-      </Box>
-    </>
+    <RegisterForm
+      handleSubmit={handleSubmit}
+      reqErrorMsg={errorMessage}
+    />
   ); 
 };
 
 export default Register;
-
-
-
-// handleSubmit -> 

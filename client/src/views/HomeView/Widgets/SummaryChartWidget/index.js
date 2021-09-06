@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -14,8 +14,8 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 // Custom Components
-import Tab1_ONE_Chart from './Components/Tab1_ONE_Chart'
-import Tab2_REP_Chart from './Components/Tab2_REP_Chart'
+import Tab1ONEChart from './Components/Tab1ONEChart'
+import Tab2REPChart from './Components/Tab2REPChart'
 //  --------------------------------
 //  --------------------------------
 const useStyles = makeStyles(() => ({
@@ -31,8 +31,8 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
 
   const handleTabChange = (newTabID) => {
     setSumChartTabIdx(newTabID)
-    if (newTabID=="scwONE") {setWidgTitle("ONE REP MAX")}
-    else if (newTabID=="scwREP") {setWidgTitle("MULTI REP")}
+    if (newTabID === "scwONE") {setWidgTitle("ONE REP MAX")}
+    else if (newTabID === "scwREP") {setWidgTitle("MULTI REP")}
   }
 
   return  (
@@ -47,12 +47,12 @@ const SummaryChartWidget  = ({className, ...rest})  =>  {
             <Button style={{size: "small", variant: "h6"} } id="scwREP" onClick={()=>{handleTabChange("scwREP")}}>REP</Button>
           </Box>
         )}
-        title = {widgTitle + ' ' +'RECORD'}
+        title = {`${widgTitle} RECORD`}
       />
       <Divider/> 
       {/* Tab Contents Conditional Render */}
-      {sumChartTabIdx=="scwONE" && <Tab1_ONE_Chart/>}
-      {sumChartTabIdx=="scwREP" && <Tab2_REP_Chart/>}
+      {sumChartTabIdx === "scwONE" && <Tab1ONEChart/>}
+      {sumChartTabIdx === "scwREP" && <Tab2REPChart/>}
       <Divider/>
       <Box
         display="flex"

@@ -3,7 +3,7 @@ import React from 'react'
 import { CardContent, Box, useTheme } from '@material-ui/core'
 import { Radar } from 'react-chartjs-2'
 
-const Tab2_REP_Composition = () => {
+const Tab2REPComposition = () => {
   const theme = useTheme()
 
   // Data object rendered by chart: Pass excercise data here through props
@@ -58,4 +58,4 @@ const Tab2_REP_Composition = () => {
   )
 }
 
-export default Tab2_REP_Composition
+export default Tab2REPComposition

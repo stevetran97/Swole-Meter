@@ -15,7 +15,7 @@ module.exports = new PassportLocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   session: false,
-  passReqtoCallback: true
+  passReqToCallback: true
 }, (req, email, password, done) => {
   const userData = {
     email: email.trim(),
@@ -24,10 +24,8 @@ module.exports = new PassportLocalStrategy({
 
   // Find User by email
   return User.findOne({ email: userData.email }, (err, user) => {
-    // Early Error done return: General Mongoose User.findOne error
     if (err) return done(err);
 
-    // Early Error done return: Incorrect email or password if no user exists
     if (!user) {
       const error = new Error('Incorrect email or password');
       error.name = 'IncorrectCredentialsError';
@@ -35,12 +33,9 @@ module.exports = new PassportLocalStrategy({
       return done(error);
     };
 
-    // check if a hashed user's password is equal to a value saved in the database
     return user.comparePassword(userData.password, (passwordErr, isMatch) => {
-      // Early Error done return: General compare password error
       if (err) return done(err);
 
-      // Early Error done return: Incorrect email or password if password does not match
       if (!isMatch) {
         const error = new Error('Incorrect email or password');
         error.name = 'IncorrectCredentialsError';
@@ -48,22 +43,20 @@ module.exports = new PassportLocalStrategy({
         return done(error);
       };
 
-      // ----------------------------------------------------------------
-      /**  Create and return signed token as per JWT procedure 
-        *
-        */
       const payload = {
         sub: user._id
       };
 
-      // Create Token string -> signed user._id (assigned to that user) and jwtSecret key from the config file
-      const token = jwt.sign(payload, config.jwtSecret);
+      const token = jwt.sign(
+        payload, 
+        config.jwtSecret,
+        { expiresIn: '1h' }
+      );
       const data = {
-        name: user.name
+        data: user
       };
 
       return done(null, token, data);
-      // ----------------------------------------------------------------
     });
   });
 });

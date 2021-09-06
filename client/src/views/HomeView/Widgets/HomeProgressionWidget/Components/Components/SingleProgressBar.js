@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
 import PropTypes from 'prop-types'
 
 import {

@@ -22,7 +22,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon app.js",
+    "server": "nodemon server.js",
     "seed": "node seeders/seed.js"
   },
   "eslintConfig": {

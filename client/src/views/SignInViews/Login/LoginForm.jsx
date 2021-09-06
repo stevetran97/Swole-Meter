@@ -1,24 +1,24 @@
-import React from 'react'
+import React from 'react';
 
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
   Link,
   TextField,
   Typography
 } from '@material-ui/core'
 
-const Login = () => {
-  const navigate = useNavigate();
 
-  return (
+const LoginForm = ({
+  handleSubmit,
+  reqErrorMsg
+}) => {
+  return(
     <>
       <Helmet>
         <title>Login | Swolemeter</title>
@@ -43,13 +43,11 @@ const Login = () => {
               password: Yup.string().max(255).required("Password is required")
             })}
             // Function for handling post request to login: Not finished
-            onSubmit = {(values, actions) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                actions.setSubmitting(false);
-
-                // Add api call to validate user and redirect to dashboard
-              }, 1000);
+            onSubmit = {async (values, actions) => {
+              actions.setSubmitting(true);
+              const response = await handleSubmit(values)
+              console.log(response)
+              actions.setSubmitting(false);
             }}
           >
             {({
@@ -61,7 +59,26 @@ const Login = () => {
               touched,
               values
             }) => (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>   
+                {reqErrorMsg ? (
+                  <Typography
+                    color="textPrimary"
+                    variant="h6"
+                  >
+                    {reqErrorMsg}
+                  </Typography>
+                  ) : ''
+                }
+
+                {isSubmitting ? (
+                  <Typography
+                    color="textPrimary"
+                    variant="h6"
+                  >
+                    Submitting...
+                  </Typography>
+                  ) : ''
+                }
                 <Box style={{mb: 3}}>
                   <Typography
                     color="textPrimary"
@@ -130,7 +147,7 @@ const Login = () => {
         </Container>
       </Box>
     </>
-  ) 
+  )
 }
 
-export default Login;
+export default LoginForm

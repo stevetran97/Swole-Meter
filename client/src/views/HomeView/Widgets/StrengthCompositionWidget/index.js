@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types'
-import { Radar } from 'react-chartjs-2'
 import {
   makeStyles, 
-  useTheme,   
   Card,
   CardHeader,
   Divider,
-  CardContent,
   Box,
   Button
 } from '@material-ui/core'
 
 // ---------------------------------
 // Custom Components
-import Tab1_ONE_Composition from './Components/Tab1_ONE_Composition'
-import Tab2_REP_Composition from './Components/Tab2_REP_Composition'
-import Tab3_TOT_Composition from './Components/Tab3_TOT_Composition'
+import Tab1ONEComposition from './Components/Tab1ONEComposition'
+import Tab2REPComposition from './Components/Tab2REPComposition'
+import Tab3TOTComposition from './Components/Tab3TOTComposition'
 
 // ----------------------------------------------------------------
 // Styles
@@ -38,7 +35,6 @@ var cardStyle = {
 const StrengthCompositionWidget = ({className, ...rest}) => {
   // Create styles within the function
   const classes = useStyles();
-  const theme = useTheme();
 
   // States
   const [strCompTabIdx, setStrCompTabIdx] = useState("stcwONE")
@@ -74,9 +70,9 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
       />
       <Divider/>
 
-      {strCompTabIdx=="stcwONE" && <Tab1_ONE_Composition/>} 
-      {strCompTabIdx=="stcwREP" &&<Tab2_REP_Composition/>} 
-      {strCompTabIdx=="stcwTOT" &&<Tab3_TOT_Composition/>} 
+      {strCompTabIdx === "stcwONE" && <Tab1ONEComposition/>} 
+      {strCompTabIdx === "stcwREP" &&<Tab2REPComposition/>} 
+      {strCompTabIdx === "stcwTOT" &&<Tab3TOTComposition/>} 
 
       <Divider/>
       <Box

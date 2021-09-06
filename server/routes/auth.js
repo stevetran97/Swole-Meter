@@ -1,9 +1,8 @@
 // Backend Routes for User-related APIs
-const express = require("express");
+const express = require('express');
 const validator = require('validator');
-const passport = require("passport");
+const passport = require('passport');
 const router = new express.Router();
-
 
 // --------------------------------------------------------------------------------
 
@@ -15,9 +14,9 @@ const router = new express.Router();
  *                   errors tips, and a global message for the whole form.
  */
 function validateSignupForm(payload) {
-  const errors = {};
   let isFormValid = true;
   let message = '';
+  const errors = {};
 
   // Append Error: Invalid email
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
@@ -28,12 +27,11 @@ function validateSignupForm(payload) {
   // Append Error: Invalid Password
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
     isFormValid = false;
-    errors.password = 'Please provide a correct password.';
+    errors.password = 'Password must have at least 8 characters.';
   };
 
   // Append Error: Invalid Name
-  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0
-  ) { 
+  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) { 
     isFormValid = false;
     errors.name = 'Please provide your name.'
   }; 
@@ -60,9 +58,10 @@ function validateSignupForm(payload) {
  *                   errors tips, and a global message for the whole form.
  */
 function validateLoginForm(payload) {
+  const errors = {};
   let isFormValid = true;
   let message = '';
-  let errors = {};
+
 
   // Append Error: Invalid Email
   if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
@@ -78,7 +77,7 @@ function validateLoginForm(payload) {
 
   // Set message: Fix errors
   if (!isFormValid) {
-    message = 'Check the form for errors.'
+    message = 'Check the form for errors.';
   };
 
   // Success return: Form is valid
@@ -146,27 +145,31 @@ router.post('/signup', (req, res, next) => {
  */
 router.post('/login', (req, res, next) => {
   // API call to local API -> Validate login form
-  const validationResults = validateLoginForm(req.body);
+  const validationResult = validateLoginForm(req.body);
 
+  console.log('Checkpoint 1 validationResults: ', validationResult)
   // Error return from validation failure 
-  if (!validationResults.success) {
+  if (!validationResult.success) {
     return res.status(400).json({
       success: false,
-      message: validationResults.message,
-      errors: validationResults.errors
+      message: validationResult.message,
+      errors: validationResult.errors
     });
   };
 
+  console.log('Checkpoint 1.5: typeof req.body.password', typeof req.body.password)
   // Passport Authentication Portion
-  passport.authenticate('local-login', (err, token, userData)=>{
+  return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
       // Error res return: Incorrect Credentials error return
       if (err.name === 'IncorrectCredentialsError') {
         return res.status(400).json({
           success: false,
-          message: err.message,
-        })
+          message: err.message
+        });
       };
+
+      console.log('Checkpoint 2: userData = ', userData)
       // Error res return: Other 400 server error
       return res.status(400).json({
         success: false,
@@ -183,4 +186,4 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-module.exports = router
+module.exports = router;
