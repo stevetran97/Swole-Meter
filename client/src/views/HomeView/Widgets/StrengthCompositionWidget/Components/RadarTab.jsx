@@ -1,23 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import {
+  CardContent, 
+  useTheme, 
+  Box
+} from '@material-ui/core'
 
-import { CardContent, Box, useTheme } from '@material-ui/core'
 import { Radar } from 'react-chartjs-2'
 
-const Tab3_TOT_Composition = () => {
+const RadarTab = ({
+  data,
+  ...rest
+}) => {
   const theme = useTheme()
-
-  // Data object rendered by chart: Pass excercise data here through props
-  const data = {
-    labels: ['SQUAT', 'BENCH', 'DEADLIFT', 'SHOULDER PRESS'],
-    datasets: [
-      {
-        label: 'LB x REP',
-        data: [3500, 5200, 7500, 14000],
-        backgroundColor: 'rgba(21, 88, 203, 0.6)',
-        borderWidth: 1,
-      },
-    ],
-  }
 
   // Radar formatting options
   const options = {
@@ -44,7 +39,7 @@ const Tab3_TOT_Composition = () => {
         suggestedMin: 0
       }
     }
-    };
+  };
 
   return (
     <CardContent>
@@ -52,10 +47,15 @@ const Tab3_TOT_Composition = () => {
         height={500}
         position="relative"
       >
-        <Radar data={data} options={options}/>
+        <Radar data={data} options={options}/> 
       </Box>
     </CardContent>
-  )
+  ) 
 }
 
-export default Tab3_TOT_Composition
+RadarTab.propTypes = {
+  className: PropTypes.string,
+  data: PropTypes.object
+};
+
+export default RadarTab

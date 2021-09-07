@@ -60,10 +60,3 @@ module.exports = new PassportLocalStrategy({
     });
   });
 });
-
-
-// Use:
-  // Defines the login strategy: local-login
-// Implementations
-  // 1. Imported at index.js in backend
-  // 2. local-login passport strategy is invoked in auth.js for /login api call

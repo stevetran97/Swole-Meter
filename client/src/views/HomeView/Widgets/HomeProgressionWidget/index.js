@@ -6,25 +6,23 @@ import {
 } from '@material-ui/core'
 
 // Custom Components
-import Tab1ONEProgress from "./Components/Tab1ONEProgress.js";
-import Tab2REPProgress from "./Components/Tab2REPProgress.js";
+import ProgressionTab from "./Components/ProgressionTab.js";
 
 // Styles
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    display: 'block',
+    transitionDuration: '0.3s'
+  },
 }));
 
-var cardStyle = {
-  display: 'block',
-  transitionDuration: '0.3s'
-}
+// Data Placeholder
+const dataONE = 'placeholder'
+const dataREP = 'placeholder'
 
 // Primary Component: Progression Widget
 const HomeProgressionWidget = ({className, ...rest})  => {
   const classes = useStyles();
-
-  // Data Placeholder
-
 
   // States
   const [progTabIdx, setProgTabIdx] = useState("hpwONE")
@@ -41,7 +39,6 @@ const HomeProgressionWidget = ({className, ...rest})  => {
     <Card
       className = {clsx(classes.root, className)}
       {...rest}
-      style = {cardStyle}
     >
       <CardHeader
         title = {progWidgTitle + ' PROGRESSION'}
@@ -59,8 +56,8 @@ const HomeProgressionWidget = ({className, ...rest})  => {
         )}
       />
       <Divider/>
-      {progTabIdx === "hpwONE" && <Tab1ONEProgress/>}
-      {progTabIdx === "hpwREP" && <Tab2REPProgress/>}
+      {progTabIdx === "hpwONE" && <ProgressionTab data={dataONE}/>}
+      {progTabIdx === "hpwREP" && <ProgressionTab data={dataREP}/>}
       <Divider/>
       <Box
         display="flex"

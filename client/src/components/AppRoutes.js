@@ -8,12 +8,12 @@ const AppRoutes = ({ children, isPrivate }) => {
 
 	return (		
 		<>
-			{ isPrivate && !Boolean(userDetails.token) ? (
-					<Navigate to="/login" />
-				) : (
-					<>{children}</>
-				)
-			} 
+				{ isPrivate && !Boolean(userDetails.token) ? (
+						<Navigate to="/login" />
+					) : (
+						<>{children}</>
+					)
+				} 
 		</>
 	);
 };

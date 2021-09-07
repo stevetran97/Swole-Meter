@@ -6,12 +6,10 @@ import {
 
 import Page from '../../components/Page';
 
-//  --------------------------------
 // Custom Components
 import HomeProgressionWidget from "./Widgets/HomeProgressionWidget";
 import SummaryChartWidget from "./Widgets/SummaryChartWidget";
 import StrengthCompositionWidget from "./Widgets/StrengthCompositionWidget"
-//  --------------------------------
 
 // Styling
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//  --------------------------------
 // Main Dashboard Component
 const HomeView = ({ className, ...rest }) => {
   const classes = useStyles();

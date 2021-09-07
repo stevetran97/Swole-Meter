@@ -4,30 +4,36 @@ import PropTypes from 'prop-types'
 import {
   Box, CardContent, Grid, LinearProgress, Typography, makeStyles, withStyles, Button
 } from '@material-ui/core'
-
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 // Styles
-const classes = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%',
   },
+  textImproved: {
+    color: "green"
+  },
+  textDecline: {
+    color: "red"
+  },
 }));
 
-// Primary Widget Component: Single ProgressBar Row Component
-function SingleProgressBar(props) {
-  // ----------------------------------------------------------------
-  // Local Custom Components
-  // Progress Bar Conditional Styling and Helpers
-  // Custom ProgressBar for Local Component use
+const SingleProgressBar = ({
+  exercise, // String denoting exercise type (bench, squat, etc.)
+  exerciseProgressPercent, //Percentage of goal reached
+  improvePercent // Percentage improved since some time
+}) => {
+  const classes = useStyles()
+
   const BorderLinearProgress = withStyles((theme) => ({
     root: {
       height: 10,
       borderRadius: 5,
     },
     colorPrimary: {
-      backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+      backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
     },
     bar: {
       borderRadius: 5,
@@ -35,149 +41,89 @@ function SingleProgressBar(props) {
     },
   }))(LinearProgress);
 
-  // ACHIEVED GOAL Custom ProgressBar for Local Component use
-  const FinishedBorderLinearProgress = withStyles((theme) => ({
-    colorPrimary: {
-      backgroundColor: theme.palette.green[theme.palette.type === 'light' ? 200 : 700],
-    },
-  }))(BorderLinearProgress);
-
-  // Chooses up or down progress arrow depending on the percentage improvement
-  const ChooseImprovDirec = () => {
-    if (props.improvement_percent > 0) {
-      return (
-        <>
-          <KeyboardArrowUpIcon className={classes.differenceIcon} style={{fill: "green"}} />
-          <ImprovedText
-            className={classes.differenceValue}
-            variant = 'body2'
-          >
-            {props.improvement_percent} % 
-          </ImprovedText> 
-        </>
-      )
-    } else if (props.improvement_percent < 0) {
-      return (
-        <>
-          <KeyboardArrowDownIcon className={classes.differenceIcon} style={{fill: "red"}}/>
-          <DeclineText 
-            className={classes.differenceValue}
-            variant = 'body2'
-          >
-            {props.improvement_percent} % 
-          </DeclineText > 
-        </>
-      )
-    }
-  }
-
-  // Custom Typography for Improvement Indication
-  const ImprovedText = withStyles({
-    root: {
-      color: "green"
-    },
-  })(Typography);
-
-  // Custom Typography for Decline Indication
-  const DeclineText = withStyles({
-    root: {
-      color: "red"
-    },
-  })(Typography);
-
-
-  // Green at 100% goal
-  const GoalPercentageDisplay = () => {
-    if (props.exercise_progress_percent >= 100) {
-      return (
-        <ImprovedText
-          color = "textPrimary"
-          variant = 'h3'
-        >
-          {props.exercise_progress_percent}%
-        </ImprovedText>
-      )
-    } else if (props.exercise_progress_percent <= 100) {
-      return (
-        <Typography
-          color = "textPrimary"
-          variant = 'h3'
-        >
-          {props.exercise_progress_percent}%
-        </Typography>
-      )
-    }
-  }
-
-  // Green at 100% goal
-  const SetGoalButton = () => {
-    if (props.exercise_progress_percent >= 100) {
-      return (
-        <Button style={{
-          color: "textPrimary",
-          variant: 'h3'
-        }}
-        >
-          New Goal
-        </Button>
-      )
-    } else if (props.exercise_progress_percent <= 100) {
-      return <Box/>
-    }
-  }
-  // Local Components
-  // ----------------------------------------------------------------
-
-  return (
+  return(
     <CardContent> 
+      <Grid
+        container
+        justify="space-between"
+        spacing = {1}
+      >
+        <Grid item>
+          {/* Exercise Title */}
+          <Typography
+            style={{color: 'textSecondary'}}        
+            gutterBottom
+            variant = 'h5'
+          >
+            {exercise}
+          </Typography>
+        </Grid>
+        <Box>
+          {/* Conditional Render: New Goal Button */}
+          {exerciseProgressPercent >= 100 && (
+            <Button style={{
+              color: "textPrimary",
+              variant: 'h3'
+            }}
+            >
+              New Goal
+            </Button>)
+          }
+        </Box>
+      </Grid>
+      <Box mt={1}>
+        <BorderLinearProgress
+          variant = 'determinate'
+          value = {exerciseProgressPercent}
+        />
+      </Box>
+      <Box mt={1} 
+        display = "flex"
+        alignItems = "center"
+      >
         <Grid
-          container
-          justify="space-between"
-          spacing = {1}
+        container
+        justify = "space-between"
+        spacing={1}
         >
           <Grid item>
+            {/* <GoalPercentageDisplay/> */}
             <Typography
-              style={{color: 'textSecondary', variant: "h6"}}        
-              gutterBottom
+              className={improvePercent > 0 ? classes.improvedText : ''}
+              color = "textPrimary"
+              variant = 'h3'
             >
-              {props.exercise}
+              {exerciseProgressPercent}%
             </Typography>
           </Grid>
-          <Box>
-            <SetGoalButton/>
-          </Box>
-        </Grid>
-        <Box mt={1}>
-          <BorderLinearProgress
-            variant = 'determinate'
-            value = {props.exercise_progress_percent}
-          />
-        </Box>
-        <Box mt={1} 
-          display = "flex"
-          alignItems = "center"
-        >
-          <Grid
-          container
-          justify = "space-between"
-          spacing={1}
-          >
-            <Grid item>
-              <GoalPercentageDisplay/>
-            </Grid>
-            <Grid item>
-              <Box mt = {1}
-                display = "flex"
-                alignItems ='centre'
+          <Grid item>
+            <Box mt = {1}
+              display = "flex"
+              alignItems ='centre'
+            >
+              {/* Improvement Indicator*/}
+              {improvePercent > 0 ? (
+                  <KeyboardArrowUpIcon style={{fill: "green"}} />
+                ) : (improvePercent < 0 ? (
+                    <KeyboardArrowDownIcon style={{fill: "red"}}/>
+                  ) : (
+                    <></>
+                  )
+                )
+              }
+              <Typography 
+                className={improvePercent > 0 ? classes.textImproved : (improvePercent < 0 ? classes.textDecline : '')}
+                variant = 'body1'
               >
-                <ChooseImprovDirec/>
-              </Box>           
-            </Grid> 
-          </Grid>
-        </Box>
-      </CardContent>
-  )
-}
+                {improvePercent} % 
+              </Typography>
+            </Box>           
+          </Grid> 
+        </Grid>
+      </Box>
+    </CardContent>
+  );
+};
 
 SingleProgressBar.propTypes = {
   className: PropTypes.string

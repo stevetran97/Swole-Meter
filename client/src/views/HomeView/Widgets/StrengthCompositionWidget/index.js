@@ -10,27 +10,61 @@ import {
   Button
 } from '@material-ui/core'
 
-// ---------------------------------
 // Custom Components
-import Tab1ONEComposition from './Components/Tab1ONEComposition'
-import Tab2REPComposition from './Components/Tab2REPComposition'
-import Tab3TOTComposition from './Components/Tab3TOTComposition'
+import RadarTab from './Components/RadarTab'
 
-// ----------------------------------------------------------------
 // Styles
-// Applies base style to the page
 const useStyles = makeStyles(() => ({
-  root:{}
+  root:{
+    display: 'block',
+    transitionDuration: '0.3s',
+    height: "100%"
+  }
 }));
 
-// Modified card style. Only card related
-var cardStyle = {
-  display: 'block',
-  transitionDuration: '0.3s',
-  height: "100%",
+// ---------------------------------
+// Staged Data
+// ONE REP RADAR CHART STRENGTH COMPOSITION DATA
+const dataONE = {
+  labels: ['SQUAT', 'BENCH', 'DEADLIFT', 'SHOULDER PRESS'],
+  datasets: [
+    {
+      label: 'LB',
+      data: [2500, 3000, 3500, 6000],
+      backgroundColor: 'rgba(21, 88, 203, 0.6)',
+      borderWidth: 1,
+    },
+  ],
 }
 
-// ----------------------------------------------------------------
+// MULTI REP RADAR CHART STRENGTH COMPOSITION DATA
+const dataREP = {
+  labels: ['SQUAT', 'BENCH', 'DEADLIFT', 'SHOULDER PRESS'],
+  datasets: [
+    {
+      label: 'LB x REP',
+      data: [1000, 2200, 4000, 8000],
+      backgroundColor: 'rgba(21, 88, 203, 0.6)',
+      borderWidth: 1,
+    },
+  ],
+}
+
+// ONE AND MULTI REP RADAR CHART STRENGTH COMPOSITION DATA
+const dataTOT = {
+  labels: ['SQUAT', 'BENCH', 'DEADLIFT', 'SHOULDER PRESS'],
+  datasets: [
+    {
+      label: 'LB x REP',
+      data: [3500, 5200, 7500, 14000],
+      backgroundColor: 'rgba(21, 88, 203, 0.6)',
+      borderWidth: 1,
+    },
+  ],
+}
+// ---------------------------------
+
+
 // Primary Widget Function
 const StrengthCompositionWidget = ({className, ...rest}) => {
   // Create styles within the function
@@ -62,18 +96,15 @@ const StrengthCompositionWidget = ({className, ...rest}) => {
     <Card
       className = {clsx(classes.root, className)}
       {...rest}
-      style = {cardStyle}
     >
       <CardHeader
         title = {strCompTitle + " WORK"}
         height={10}
       />
       <Divider/>
-
-      {strCompTabIdx === "stcwONE" && <Tab1ONEComposition/>} 
-      {strCompTabIdx === "stcwREP" &&<Tab2REPComposition/>} 
-      {strCompTabIdx === "stcwTOT" &&<Tab3TOTComposition/>} 
-
+      {strCompTabIdx === "stcwONE" && <RadarTab data={dataONE} />} 
+      {strCompTabIdx === "stcwREP" && <RadarTab data={dataREP} />} 
+      {strCompTabIdx === "stcwTOT" && <RadarTab data={dataTOT} />} 
       <Divider/>
       <Box
         display="flex"
