@@ -31,7 +31,7 @@ const Login = () => {
     try {
 			let response = await loginUser(dispatch, values, signal);
 			if (!response.user) return;
-      setSubmitting(false)
+      setSubmitting(false);
 			navigate('/app/dashboard');
 		} catch (error) {
 			console.log(error);

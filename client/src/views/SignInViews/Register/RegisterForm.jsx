@@ -50,9 +50,7 @@ const RegisterForm = ({
             }
             onSubmit = {async (values, actions) => {
                 actions.setSubmitting(true);
-                const response = await handleSubmit(values);
-                console.log(response)
-                actions.setSubmitting(false);
+                const response = await handleSubmit(values, actions.setSubmitting);
             }}
           >
             {({

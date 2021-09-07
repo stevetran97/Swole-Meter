@@ -1,4 +1,4 @@
-const ROOT_URL = 'https://localhost:5000';
+const ROOT_URL = 'http://localhost:5000';
 
 export async function loginUser(dispatch, loginPayload, signal) {
   const requestOptions = {
@@ -30,11 +30,12 @@ export async function loginUser(dispatch, loginPayload, signal) {
 };
 
 
-export async function signupUser(dispatch, signupPayload) {
+export async function signupUser(dispatch, signupPayload, signal) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(signupPayload)
+    body: JSON.stringify(signupPayload),
+    signal: signal
   };
 
   try {

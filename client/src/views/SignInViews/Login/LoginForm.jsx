@@ -58,15 +58,15 @@ const LoginForm = ({
               values
             }) => (
               <form onSubmit={handleSubmit}>   
-                {/* {reqErrorMsg ? (
+                {reqErrorMsg ? (
                   <Typography
-                    color="textPrimary"
+                    color="red"
                     variant="h6"
                   >
                     {reqErrorMsg}
                   </Typography>
                   ) : ''
-                } */}
+                }
 
                 {isSubmitting ? (
                   <Typography
