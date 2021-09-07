@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 // Custom Components
@@ -14,17 +14,24 @@ const Login = () => {
   // States
   const { errorMessage } = useAuthState();
 
+  // useEffect: Cleanup Login Request
+  const controller = new AbortController();
+  const { signal } = controller;
+  useEffect(() => {
+    return ()=>controller.abort()
+  }, []);
+
   // Helpers
   /**
    * Handles Processing Login
    *
    * @param {object} values - Login Form JSON object - attributes: email, password
    */
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, setSubmitting) => {
     try {
-			let response = await loginUser(dispatch, values);
-      console.log('Checkpoint', response)
+			let response = await loginUser(dispatch, values, signal);
 			if (!response.user) return;
+      setSubmitting(false)
 			navigate('/app/dashboard');
 		} catch (error) {
 			console.log(error);

@@ -20,7 +20,7 @@ const Register = () => {
       if (!response) throw new Error('No response');
       navigate('/login');
     } catch (error) {
-      console.log(error);
+      console.log("[error] Registration handleSubmit", error);
     };
   };
 

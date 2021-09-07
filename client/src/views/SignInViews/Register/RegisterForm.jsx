@@ -38,14 +38,12 @@ const RegisterForm = ({
           <Formik
             initialValues={{
               email: "",
-              name: "",
               password: "",
               policy: false
             }}
             validationSchema={
               Yup.object().shape({
                 email: Yup.string().email("Please enter a valid email").max(255).required("Email is required"),
-                name: Yup.string().max(255).required("Username is required"),
                 password: Yup.string().max(255).required("Password is required"),
                 policy: Yup.boolean().oneOf([true], "This field must be checked")
               })
@@ -101,19 +99,6 @@ const RegisterForm = ({
                     Use your email to create a new account
                   </Typography>
                 </Box>
-                {/* Name Input */}
-                <TextField 
-                  error={Boolean(touched.name && errors.name)}
-                  fullWidth
-                  helperText={touched.name && errors.name}
-                  label="First name"
-                  margin="normal"
-                  name="name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.name}
-                  variant="outlined"
-                />
                 {/* Email Input */}
                 <TextField 
                   error={Boolean(touched.email && errors.email)}

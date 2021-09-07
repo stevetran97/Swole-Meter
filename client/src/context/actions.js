@@ -1,10 +1,11 @@
 const ROOT_URL = 'https://localhost:5000';
 
-export async function loginUser(dispatch, loginPayload) {
+export async function loginUser(dispatch, loginPayload, signal) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(loginPayload)
+    body: JSON.stringify(loginPayload),
+    signal: signal
   };
 
   try {
@@ -23,7 +24,7 @@ export async function loginUser(dispatch, loginPayload) {
     return;
   }
   catch (error) {
-    dispatch({ type: 'LOGIN_ERROR', error: error});
+    dispatch({ type: 'LOGIN_ERROR', error: error.message});
     console.log('Action caught error: ', error);
   };
 };

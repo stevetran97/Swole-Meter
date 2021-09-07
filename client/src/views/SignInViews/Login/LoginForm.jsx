@@ -45,9 +45,7 @@ const LoginForm = ({
             // Function for handling post request to login: Not finished
             onSubmit = {async (values, actions) => {
               actions.setSubmitting(true);
-              const response = await handleSubmit(values)
-              console.log(response)
-              actions.setSubmitting(false);
+              const response = await handleSubmit(values, actions.setSubmitting)
             }}
           >
             {({
@@ -60,7 +58,7 @@ const LoginForm = ({
               values
             }) => (
               <form onSubmit={handleSubmit}>   
-                {reqErrorMsg ? (
+                {/* {reqErrorMsg ? (
                   <Typography
                     color="textPrimary"
                     variant="h6"
@@ -68,7 +66,7 @@ const LoginForm = ({
                     {reqErrorMsg}
                   </Typography>
                   ) : ''
-                }
+                } */}
 
                 {isSubmitting ? (
                   <Typography
