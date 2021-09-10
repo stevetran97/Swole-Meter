@@ -29,7 +29,7 @@ let userSeed = [
     _id: userIdArr[0],
     username: "steviewonder97",
     password: "123456",
-    email: "steve11111@live.ca",
+    email: "steve11111@hotmail.org",
     workouts: [workoutIdArr[0], workoutIdArr[1]]
   },
   {

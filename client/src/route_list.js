@@ -9,14 +9,14 @@ import Login from './views/SignInViews/Login'
 import Register from './views/SignInViews/Register'
 
 // Wrappers
-import AppRoutes from './components/AppRoutes'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 // Primary Route Junction
 const routes = [
   {
     path: 'app',
-    element: <AppRoutes isPrivate={true}><DashboardLayout /></AppRoutes>,
+    element: <ProtectedRoute><DashboardLayout /></ProtectedRoute>,
     children: [
       { path: 'dashboard', element: <HomeView /> },
       // {path: 'workouts/squat', element: <HomeView/>},

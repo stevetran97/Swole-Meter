@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const config = require('./config');
 const cors = require('cors');
@@ -9,15 +10,9 @@ require('./server/models').connect(config.dbUri);
 
 const app = express();
 
-// ----------------------------------------------------------------
-app.use(cors());
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-// ----------------------------------------------------------------
-
+app.use(cors(
+  { origin: true, credentials: true }
+));
 
 // Load static files at following directories
 app.use(express.static("public"));
@@ -27,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Tell app to parse JSON
 app.use(bodyParser.json() );       
 app.use(bodyParser.urlencoded() ); 
+app.use(cookieParser(config.jwtSecret));
 
 // Setup passport for authentification
 app.use(passport.initialize());
@@ -48,7 +44,7 @@ app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 
 // Set port and listen on server
-app.set('port', (process.env.PORT || config.backendPort));
+app.set('port', (process.env.PORT || config.serverPortDev));
 
 app.listen(app.get('port'), () => {  
   console.log("App is running on port: " + app.get('port'));

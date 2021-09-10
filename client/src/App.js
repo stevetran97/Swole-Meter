@@ -6,7 +6,6 @@ import { ThemeProvider } from '@material-ui/core';
 import DefaultStyle from './components/DefaultStyles';
 import theme from './theme'
 
-
 import { AuthProvider } from './context';
 
 const App = () => {

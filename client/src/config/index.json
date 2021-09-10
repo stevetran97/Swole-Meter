@@ -1,0 +1,4 @@
+{
+  "authCookieName": "swolemeter_token",
+  "clientPort": "http://localhost:3001"
+}

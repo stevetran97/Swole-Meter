@@ -86,15 +86,10 @@ const utilityLinks = [
     title: 'Settings'
   },
   {
-    href: '/login',
+    href: '/logout',
     icon: AccountBox,
-    title: 'Login'
+    title: 'Logout'
   },
-  {
-    href: '/register',
-    icon: AccountBox,
-    title: 'Register'
-  }
 ]
 
 // User data placeholder: Defines current user logged in
@@ -110,7 +105,7 @@ const NavBar = ({onMobileClose, openMobile}) => {
   const classes = useStyles();
   const location = useLocation();
 
-  useEffect(() => {
+  useEffect((openMobile, onMobileClose) => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }

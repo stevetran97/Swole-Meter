@@ -3,6 +3,7 @@ const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
 const router = new express.Router();
+const config = require('../../config');
 
 // --------------------------------------------------------------------------------
 
@@ -39,7 +40,7 @@ function validateSignupForm(payload) {
   // Success return:
   return {
     success: isFormValid,
-    message, 
+    message,
     errors
   };
 };
@@ -107,7 +108,7 @@ router.post('/signup', (req, res, next) => {
   return passport.authenticate('local-signup', (err) => {
     if (err) {
       // Error Return from Dupe Email
-      if (err.name === 'MongoError' && err.code === 11000 ) {
+      if (err.name === 'MongoError' && err.code === 11000) {
         return res.status(409).json({
           success: false,
           message: 'Check the form for errors',
@@ -141,7 +142,6 @@ router.post('/login', (req, res, next) => {
   // API call to local API -> Validate login form
   const validationResult = validateLoginForm(req.body);
 
-  console.log('Checkpoint 1 validationResults: ', validationResult)
   // Error return from validation failure 
   if (!validationResult.success) {
     return res.status(400).json({
@@ -151,7 +151,6 @@ router.post('/login', (req, res, next) => {
     });
   };
 
-  console.log('Checkpoint 1.5: typeof req.body.password', typeof req.body.password)
   // Passport Authentication Portion
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
@@ -163,7 +162,6 @@ router.post('/login', (req, res, next) => {
         });
       };
 
-      console.log('Checkpoint 2: userData = ', userData)
       // Error res return: Other 400 server error
       return res.status(400).json({
         success: false,
@@ -171,7 +169,14 @@ router.post('/login', (req, res, next) => {
       });
     };
 
-    return res.json({ 
+    res.cookie(config.authCookieName, token, {
+      httpOnly: true,
+      sameSite: true,
+      signed: true,
+      secure: true,
+    })
+
+    return res.json({
       success: true,
       message: 'You have successfully logged in!',
       token,

@@ -1,45 +1,38 @@
-let user = localStorage.getItem('currentUser')
-  ? JSON.parse(localStorage.getItem('currentUser'))
-  : '';
-
-let token = localStorage.getItem('currentToken') 
-  ? JSON.parse(localStorage.getItem('currentToken'))
-  : '';
-
 export const initialState = {
-  user: '' || user,
-  token: '' || token,
-  loading: false,
-  errorMessage: null
+  user: '',
+  authenticated: false,
+  errorMessage: null,
 };
 
 export const AuthReducer = (initialState, action) => {
   switch (action.type) {
     case 'REQUEST_LOGIN':
-      return {
+      return{
         ...initialState,
-        loading: true
-      };
+        errorMessage: null
+      }
     case 'LOGIN_SUCCESS':
       return {
         ...initialState,
         user: action.payload.user,
-        token: action.payload.token,
-        loading: false
+        authenticated: action.payload.authenticated,
+        errorMessage: null
       };
     case 'LOGOUT':
       return {
         ...initialState,
         user: '',
-        token: ''
+        authenticated: false,
+        errorMessage: null
       };
     case 'LOGIN_ERROR':
       return {
         ...initialState,
-        loading: false,
+        authenticated: false,
         errorMessage: action.error
       };
     default: 
       throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
+

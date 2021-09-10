@@ -1,22 +1,46 @@
-const ROOT_URL = 'http://localhost:5000';
+import config from '../config'
 
+const ROOT_URL = config.clientPort;
+
+// Local Helpers
+class CookieStorageMethods {
+  static CheckSMCookieExist(cookiename) {
+    var d = new Date();
+    d.setTime(d.getTime() + (1000));
+    var expires = "expires=" + d.toUTCString();
+  
+    document.cookie = cookiename + "=new_value;path=/;" + expires;
+
+    if (document.cookie.indexOf(cookiename + '=') == -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+// Exported Clientside Handlers
 export async function loginUser(dispatch, loginPayload, signal) {
   const requestOptions = {
     method: 'POST',
+    credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(loginPayload),
     signal: signal
   };
 
   try {
-    dispatch({ type: 'REQUEST_LOGIN' });
+    dispatch({type: 'REQUEST_LOGIN'})
     let response = await fetch(`${ROOT_URL}/auth/login`, requestOptions);
     let data = await response.json();
 
+    let isAuthenticated = CookieStorageMethods.CheckSMCookieExist(config.authCookieName) 
+
     if (data.user) {
-      dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-      localStorage.setItem('currentUser', JSON.stringify(data.user));
-      localStorage.setItem('currentToken', JSON.stringify(data.token));
+      dispatch({ 
+        type: 'LOGIN_SUCCESS', 
+        payload: { ...data, authenticated: isAuthenticated }
+      });
       return data;
     }
     dispatch({ type: 'LOGIN_ERROR', error: data.message });

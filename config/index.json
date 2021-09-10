@@ -1,5 +1,6 @@
 {
   "dbUri": "mongodb://localhost/swole-meter",
   "jwtSecret": "Secret Key Placeholder",
-  "backendPort": 5000
+  "serverPortDev": 3001,
+  "authCookieName": "swolemeter_token"  
 }
